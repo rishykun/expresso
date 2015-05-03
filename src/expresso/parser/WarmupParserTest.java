@@ -47,6 +47,7 @@ public class WarmupParserTest {
             ExpressionParser parser = new ExpressionParser(tokens);
             parser.reportErrorsAsExceptions();
             ParseTree tree = parser.line();
+            assertTrue(true);
         }catch (Exception e){
             assertTrue(false);
         }
@@ -62,6 +63,7 @@ public class WarmupParserTest {
             ExpressionParser parser = new ExpressionParser(tokens);
             parser.reportErrorsAsExceptions();
             ParseTree tree = parser.line();
+            assertTrue(false);
         }catch (Exception e){
             assertTrue(true);
         }
@@ -77,6 +79,7 @@ public class WarmupParserTest {
             ExpressionParser parser = new ExpressionParser(tokens);
             parser.reportErrorsAsExceptions();
             ParseTree tree = parser.line();
+            assertTrue(false);
         }catch (Exception e){
             assertTrue(true);
         }
@@ -92,6 +95,7 @@ public class WarmupParserTest {
             ExpressionParser parser = new ExpressionParser(tokens);
             parser.reportErrorsAsExceptions();
             ParseTree tree = parser.line();
+            assertTrue(false);
         }catch (Exception e){
             assertTrue(true);
         }
@@ -107,6 +111,7 @@ public class WarmupParserTest {
             ExpressionParser parser = new ExpressionParser(tokens);
             parser.reportErrorsAsExceptions();
             ParseTree tree = parser.line();
+            assertTrue(true);
         }catch (Exception e){
             assertTrue(false);
         }
@@ -122,6 +127,7 @@ public class WarmupParserTest {
             ExpressionParser parser = new ExpressionParser(tokens);
             parser.reportErrorsAsExceptions();
             ParseTree tree = parser.line();
+            assertTrue(true);
         }catch (Exception e){
             assertTrue(false);
         }
