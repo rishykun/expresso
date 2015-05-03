@@ -6,6 +6,7 @@ import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.ParserRuleContext;
+import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.TokenStream;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -98,6 +99,8 @@ public class WarmupParserDisplays {
         ParseTreeWalker walker = new ParseTreeWalker();
         ExpressionListener listener = new ExpressionListenerPrintEverything();
         walker.walk(listener, tree);
+        System.err.println(tree.toStringTree(parser));
+        ((RuleContext)tree).inspect(parser);
       //use of inspect method should be here, unsure of its syntax in reading 18
     }
     
@@ -110,6 +113,8 @@ public class WarmupParserDisplays {
         ParseTreeWalker walker = new ParseTreeWalker();
         ExpressionListener listener = new ExpressionListenerPrintEverything();
         walker.walk(listener, tree);
+        System.err.println(tree.toStringTree(parser));
+        ((RuleContext)tree).inspect(parser);
       //use of inspect method should be here, unsure of its syntax in reading 18
     }
     
@@ -122,6 +127,8 @@ public class WarmupParserDisplays {
         ParseTreeWalker walker = new ParseTreeWalker();
         ExpressionListener listener = new ExpressionListenerPrintEverything();
         walker.walk(listener, tree);
+        System.err.println(tree.toStringTree(parser));
+        ((RuleContext)tree).inspect(parser);
         //use of inspect method should be here, unsure of its syntax in reading 18
     }
 
