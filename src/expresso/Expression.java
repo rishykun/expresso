@@ -1,12 +1,13 @@
 package expresso;
 
 /**
- * 
+ * An data type which represents an algebraic expression consisting of
+ * nonnegative
  */
 public interface Expression {
     
     // Datatype definition
-    //  Expression = Empty + NumberExp + OperationExp + ParenExp(Expression: e)
+    //  Expression = Empty + NumberExp + OperationExp
     //  NumberExp = IntegerExp(int n) + DecimalExp(double d)
     //  OperationExp = AddExp(Expression e1, Expression e2) + MultExp(Expression e1, Expressione2)
 
