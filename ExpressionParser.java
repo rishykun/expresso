@@ -1,4 +1,4 @@
-// Generated from Expression.g4 by ANTLR 4.5
+// Generated from src/expresso/parser/Expression.g4 by ANTLR 4.5
 
 package expresso.parser;
 
@@ -99,10 +99,13 @@ public class ExpressionParser extends Parser {
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 	public static class LineContext extends ParserRuleContext {
-		public BuildContext build() {
-			return getRuleContext(BuildContext.class,0);
-		}
 		public TerminalNode EOF() { return getToken(ExpressionParser.EOF, 0); }
+		public List<BuildContext> build() {
+			return getRuleContexts(BuildContext.class);
+		}
+		public BuildContext build(int i) {
+			return getRuleContext(BuildContext.class,i);
+		}
 		public LineContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -120,12 +123,25 @@ public class ExpressionParser extends Parser {
 	public final LineContext line() throws RecognitionException {
 		LineContext _localctx = new LineContext(_ctx, getState());
 		enterRule(_localctx, 0, RULE_line);
+		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(4);
-			build();
-			setState(5);
+			setState(7);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			while (_la==RIGHT_PAREN) {
+				{
+				{
+				setState(4);
+				build();
+				}
+				}
+				setState(9);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			}
+			setState(10);
 			match(EOF);
 			}
 		}
@@ -141,20 +157,7 @@ public class ExpressionParser extends Parser {
 	}
 
 	public static class BuildContext extends ParserRuleContext {
-		public List<TerminalNode> LEFT_PAREN() { return getTokens(ExpressionParser.LEFT_PAREN); }
-		public TerminalNode LEFT_PAREN(int i) {
-			return getToken(ExpressionParser.LEFT_PAREN, i);
-		}
-		public List<BuildContext> build() {
-			return getRuleContexts(BuildContext.class);
-		}
-		public BuildContext build(int i) {
-			return getRuleContext(BuildContext.class,i);
-		}
-		public List<TerminalNode> RIGHT_PAREN() { return getTokens(ExpressionParser.RIGHT_PAREN); }
-		public TerminalNode RIGHT_PAREN(int i) {
-			return getToken(ExpressionParser.RIGHT_PAREN, i);
-		}
+		public TerminalNode RIGHT_PAREN() { return getToken(ExpressionParser.RIGHT_PAREN, 0); }
 		public BuildContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -172,28 +175,11 @@ public class ExpressionParser extends Parser {
 	public final BuildContext build() throws RecognitionException {
 		BuildContext _localctx = new BuildContext(_ctx, getState());
 		enterRule(_localctx, 2, RULE_build);
-		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(13);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while (_la==LEFT_PAREN) {
-				{
-				{
-				setState(7);
-				match(LEFT_PAREN);
-				setState(8);
-				build();
-				setState(9);
-				match(RIGHT_PAREN);
-				}
-				}
-				setState(15);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			}
+			setState(12);
+			match(RIGHT_PAREN);
 			}
 		}
 		catch (RecognitionException re) {
@@ -208,11 +194,11 @@ public class ExpressionParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\4\23\4\2\t\2\4\3"+
-		"\t\3\3\2\3\2\3\2\3\3\3\3\3\3\3\3\7\3\16\n\3\f\3\16\3\21\13\3\3\3\2\2\4"+
-		"\2\4\2\2\21\2\6\3\2\2\2\4\17\3\2\2\2\6\7\5\4\3\2\7\b\7\2\2\3\b\3\3\2\2"+
-		"\2\t\n\7\3\2\2\n\13\5\4\3\2\13\f\7\4\2\2\f\16\3\2\2\2\r\t\3\2\2\2\16\21"+
-		"\3\2\2\2\17\r\3\2\2\2\17\20\3\2\2\2\20\5\3\2\2\2\21\17\3\2\2\2\3\17";
+		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\4\21\4\2\t\2\4\3"+
+		"\t\3\3\2\7\2\b\n\2\f\2\16\2\13\13\2\3\2\3\2\3\3\3\3\3\3\2\2\4\2\4\2\2"+
+		"\17\2\t\3\2\2\2\4\16\3\2\2\2\6\b\5\4\3\2\7\6\3\2\2\2\b\13\3\2\2\2\t\7"+
+		"\3\2\2\2\t\n\3\2\2\2\n\f\3\2\2\2\13\t\3\2\2\2\f\r\7\2\2\3\r\3\3\2\2\2"+
+		"\16\17\7\4\2\2\17\5\3\2\2\2\3\t";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

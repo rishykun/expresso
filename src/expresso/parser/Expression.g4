@@ -47,10 +47,13 @@ package expresso.parser;
  * You should make sure you have one rule that describes the entire input.
  * This is the "start rule". The start rule should end with the special token
  * EOF so that it describes the entire input. Below, "line" is the start rule.
- *
  * For more information, see
  * http://www.antlr.org/wiki/display/ANTLR4/Parser+Rules#ParserRules-StartRulesandEOF
  */
-line        : LEFT_PAREN RIGHT_PAREN EOF;
+line        : build EOF; 
 LEFT_PAREN  : '(';
 RIGHT_PAREN : ')';
+build       : (LEFT_PAREN build RIGHT_PAREN)*;
+
+
+

@@ -50,7 +50,12 @@ public class Main {
     }
     
     /**
-     * TODO
+     * Outputs the result of a user command, or an
+     * error message if the command is not recognized
+     * 
+     * @param substring a command to either simplify or differentiate the current polynomial
+     * @return the result of applying the command, or an error if the command is incomplete or
+     * not recognized
      */
     private static String handleCommand(String substring) {
         throw new RuntimeException("unimplemented");

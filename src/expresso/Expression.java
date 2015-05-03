@@ -19,5 +19,5 @@ public interface Expression {
     }
     
     // TODO Instance methods
-    
+      
 }
