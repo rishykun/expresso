@@ -101,7 +101,6 @@ public class WarmupParserDisplays {
         walker.walk(listener, tree);
         System.err.println(tree.toStringTree(parser));
         ((RuleContext)tree).inspect(parser);
-      //use of inspect method should be here, unsure of its syntax in reading 18
     }
     
     public void displaySingleBalanced() {
@@ -115,7 +114,6 @@ public class WarmupParserDisplays {
         walker.walk(listener, tree);
         System.err.println(tree.toStringTree(parser));
         ((RuleContext)tree).inspect(parser);
-      //use of inspect method should be here, unsure of its syntax in reading 18
     }
     
     public void displayMultipleBalanced() {
@@ -129,7 +127,6 @@ public class WarmupParserDisplays {
         walker.walk(listener, tree);
         System.err.println(tree.toStringTree(parser));
         ((RuleContext)tree).inspect(parser);
-        //use of inspect method should be here, unsure of its syntax in reading 18
     }
 
     public static void main(String[] args) {
