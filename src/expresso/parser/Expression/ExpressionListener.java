@@ -1,6 +1,6 @@
 // Generated from Expression.g4 by ANTLR 4.5
 
-package expresso.parser;
+package expresso.parser.Expression;
 
 import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
@@ -21,13 +21,33 @@ public interface ExpressionListener extends ParseTreeListener {
 	 */
 	void exitLine(ExpressionParser.LineContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ExpressionParser#build}.
+	 * Enter a parse tree produced by {@link ExpressionParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void enterBuild(ExpressionParser.BuildContext ctx);
+	void enterExpression(ExpressionParser.ExpressionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link ExpressionParser#build}.
+	 * Exit a parse tree produced by {@link ExpressionParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void exitBuild(ExpressionParser.BuildContext ctx);
+	void exitExpression(ExpressionParser.ExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ExpressionParser#tail}.
+	 * @param ctx the parse tree
+	 */
+	void enterTail(ExpressionParser.TailContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ExpressionParser#tail}.
+	 * @param ctx the parse tree
+	 */
+	void exitTail(ExpressionParser.TailContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ExpressionParser#loner}.
+	 * @param ctx the parse tree
+	 */
+	void enterLoner(ExpressionParser.LonerContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ExpressionParser#loner}.
+	 * @param ctx the parse tree
+	 */
+	void exitLoner(ExpressionParser.LonerContext ctx);
 }

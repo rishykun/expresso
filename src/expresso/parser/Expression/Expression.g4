@@ -50,10 +50,16 @@ package expresso.parser;
  * For more information, see
  * http://www.antlr.org/wiki/display/ANTLR4/Parser+Rules#ParserRules-StartRulesandEOF
  */
-line        : build EOF; 
+line        : expression EOF; 
+expression  : (LEFT_PAREN expression RIGHT_PAREN tail) | (loner tail);
+tail		: (OPERATION expression tail)?;
+loner		: VARIABLE | NUMBER;
+OPERATION	: '+' | '*';
+VARIABLE	: [a-zA-z]+;
+NUMBER		: [0-9]+ ('.' [0-9]+)?;
 LEFT_PAREN  : '(';
 RIGHT_PAREN : ')';
-build       : (LEFT_PAREN build RIGHT_PAREN)*;
+WHITESPACE : [ ]+ -> skip;
 
 
 
