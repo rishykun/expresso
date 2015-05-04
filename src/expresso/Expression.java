@@ -52,7 +52,7 @@ public interface Expression {
     
     /**
      * Simplifies this expression a sum of terms such that for all variables 
-     * vari with exponents ei, the term (var1^e1 × var2^e2 × … × varn^en) appears at most once.
+     * vari with exponents ei, the term (var1^e1 * var2^e2 * ... * varn^en) appears at most once.
      * Each term may be multiplied by a non-zero, non-identity constant factor.
      * As the simplified expression is read left-to-right, the largest exponent in each term must be non-increasing.
      * @return an expression that represents the simplified version of this expression 
