@@ -1,4 +1,4 @@
-package expresso.parser;
+package expresso.parser.BalancedParenthesis;
 
 import static org.junit.Assert.assertTrue;
 
@@ -17,17 +17,17 @@ import org.junit.Test;
 public class WarmupParserDisplays {
     
     /**
-     * This implementation of the ExpressionListener interface has methods that print out
+     * This implementation of the BalancedParenthesisListener interface has methods that print out
      * the action of a walker of a particular tree in order to compare the walker's actions
      * with the graph of the tree given by its inspect method.
      */
-    private class ExpressionListenerPrintEverything implements ExpressionListener {
+    private class BalancedParenthesisListenerPrintEverything implements BalancedParenthesisListener {
         /**
          * {@inheritDoc}
          *
          * <p>Prints when a line is entered.</p>
          */
-        @Override public void enterLine(ExpressionParser.LineContext ctx) {
+        @Override public void enterLine(BalancedParenthesisParser.LineContext ctx) {
             System.err.println("entering line");
         }
         /**
@@ -35,7 +35,7 @@ public class WarmupParserDisplays {
          *
          * <p>Prints when a line is exited.</p>
          */
-        @Override public void exitLine(ExpressionParser.LineContext ctx) {
+        @Override public void exitLine(BalancedParenthesisParser.LineContext ctx) {
             System.err.println("exiting line");
         }
         /**
@@ -43,7 +43,7 @@ public class WarmupParserDisplays {
          *
          * <p>Prints when a build is entered.</p>
          */
-        @Override public void enterBuild(ExpressionParser.BuildContext ctx) {
+        @Override public void enterBuild(BalancedParenthesisParser.BuildContext ctx) {
             System.err.println("entering build");
         }
         /**
@@ -51,7 +51,7 @@ public class WarmupParserDisplays {
          *
          * <p>Prints when a build is exited.</p>
          */
-        @Override public void exitBuild(ExpressionParser.BuildContext ctx) {
+        @Override public void exitBuild(BalancedParenthesisParser.BuildContext ctx) {
             System.err.println("exiting build");
         }
 
@@ -92,12 +92,12 @@ public class WarmupParserDisplays {
     @Test
     public void displayEmptyString() {
         CharStream stream = new ANTLRInputStream("");
-        ExpressionLexer lexer = new ExpressionLexer(stream);
+        BalancedParenthesisLexer lexer = new BalancedParenthesisLexer(stream);
         TokenStream tokens = new CommonTokenStream(lexer);
-        ExpressionParser parser = new ExpressionParser(tokens);
+        BalancedParenthesisParser parser = new BalancedParenthesisParser(tokens);
         ParseTree tree = parser.line();
         ParseTreeWalker walker = new ParseTreeWalker();
-        ExpressionListener listener = new ExpressionListenerPrintEverything();
+        BalancedParenthesisListener listener = new BalancedParenthesisListenerPrintEverything();
         walker.walk(listener, tree);
         System.err.println(tree.toStringTree(parser));
         ((RuleContext)tree).inspect(parser);
@@ -105,12 +105,12 @@ public class WarmupParserDisplays {
     
     public void displaySingleBalanced() {
         CharStream stream = new ANTLRInputStream("()");
-        ExpressionLexer lexer = new ExpressionLexer(stream);
+        BalancedParenthesisLexer lexer = new BalancedParenthesisLexer(stream);
         TokenStream tokens = new CommonTokenStream(lexer);
-        ExpressionParser parser = new ExpressionParser(tokens);
+        BalancedParenthesisParser parser = new BalancedParenthesisParser(tokens);
         ParseTree tree = parser.line();
         ParseTreeWalker walker = new ParseTreeWalker();
-        ExpressionListener listener = new ExpressionListenerPrintEverything();
+        BalancedParenthesisListener listener = new BalancedParenthesisListenerPrintEverything();
         walker.walk(listener, tree);
         System.err.println(tree.toStringTree(parser));
         ((RuleContext)tree).inspect(parser);
@@ -118,12 +118,12 @@ public class WarmupParserDisplays {
     
     public void displayMultipleBalanced() {
         CharStream stream = new ANTLRInputStream("(()(()))");
-        ExpressionLexer lexer = new ExpressionLexer(stream);
+        BalancedParenthesisLexer lexer = new BalancedParenthesisLexer(stream);
         TokenStream tokens = new CommonTokenStream(lexer);
-        ExpressionParser parser = new ExpressionParser(tokens);
+        BalancedParenthesisParser parser = new BalancedParenthesisParser(tokens);
         ParseTree tree = parser.line();
         ParseTreeWalker walker = new ParseTreeWalker();
-        ExpressionListener listener = new ExpressionListenerPrintEverything();
+        BalancedParenthesisListener listener = new BalancedParenthesisListenerPrintEverything();
         walker.walk(listener, tree);
         System.err.println(tree.toStringTree(parser));
         ((RuleContext)tree).inspect(parser);
