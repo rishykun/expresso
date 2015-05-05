@@ -38,6 +38,6 @@ public class Product implements Expression{
     @Override
     public int hashCode(){
         throw new RuntimeException("unimplemented");
-    }
+    }   
 
 }
