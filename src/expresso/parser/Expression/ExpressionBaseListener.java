@@ -1,6 +1,6 @@
 // Generated from Expression.g4 by ANTLR 4.5
 
-package expresso.parser;
+package expresso.parser.Expression;
 
 
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -31,13 +31,37 @@ public class ExpressionBaseListener implements ExpressionListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterBuild(ExpressionParser.BuildContext ctx) { }
+	@Override public void enterExpression(ExpressionParser.ExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitBuild(ExpressionParser.BuildContext ctx) { }
+	@Override public void exitExpression(ExpressionParser.ExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterTail(ExpressionParser.TailContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTail(ExpressionParser.TailContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLoner(ExpressionParser.LonerContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLoner(ExpressionParser.LonerContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

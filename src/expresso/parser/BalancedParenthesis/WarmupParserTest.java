@@ -1,4 +1,4 @@
-package expresso.parser;
+package expresso.parser.BalancedParenthesis;
 
 import static org.junit.Assert.*;
 
@@ -40,11 +40,11 @@ public class WarmupParserTest {
     @Test
     public void testParserEmptyString() {
         CharStream stream = new ANTLRInputStream("");
-        ExpressionLexer lexer = new ExpressionLexer(stream);
+        BalancedParenthesisLexer lexer = new BalancedParenthesisLexer(stream);
         lexer.reportErrorsAsExceptions();
         try {
             TokenStream tokens = new CommonTokenStream(lexer);
-            ExpressionParser parser = new ExpressionParser(tokens);
+            BalancedParenthesisParser parser = new BalancedParenthesisParser(tokens);
             parser.reportErrorsAsExceptions();
             ParseTree tree = parser.line();
             assertTrue(true);
@@ -56,11 +56,11 @@ public class WarmupParserTest {
     @Test
     public void testParserSingleParen() {
         CharStream stream = new ANTLRInputStream("(");
-        ExpressionLexer lexer = new ExpressionLexer(stream);
+        BalancedParenthesisLexer lexer = new BalancedParenthesisLexer(stream);
         lexer.reportErrorsAsExceptions();
         try {
             TokenStream tokens = new CommonTokenStream(lexer);
-            ExpressionParser parser = new ExpressionParser(tokens);
+            BalancedParenthesisParser parser = new BalancedParenthesisParser(tokens);
             parser.reportErrorsAsExceptions();
             ParseTree tree = parser.line();
             assertTrue(false);
@@ -72,11 +72,11 @@ public class WarmupParserTest {
     @Test
     public void testParserOppositeParens() {
         CharStream stream = new ANTLRInputStream(")(");
-        ExpressionLexer lexer = new ExpressionLexer(stream);
+        BalancedParenthesisLexer lexer = new BalancedParenthesisLexer(stream);
         lexer.reportErrorsAsExceptions();
         try {
             TokenStream tokens = new CommonTokenStream(lexer);
-            ExpressionParser parser = new ExpressionParser(tokens);
+            BalancedParenthesisParser parser = new BalancedParenthesisParser(tokens);
             parser.reportErrorsAsExceptions();
             ParseTree tree = parser.line();
             assertTrue(false);
@@ -88,11 +88,11 @@ public class WarmupParserTest {
     @Test
     public void testParserUnequalParens() {
         CharStream stream = new ANTLRInputStream("(())((())");
-        ExpressionLexer lexer = new ExpressionLexer(stream);
+        BalancedParenthesisLexer lexer = new BalancedParenthesisLexer(stream);
         lexer.reportErrorsAsExceptions();
         try {
             TokenStream tokens = new CommonTokenStream(lexer);
-            ExpressionParser parser = new ExpressionParser(tokens);
+            BalancedParenthesisParser parser = new BalancedParenthesisParser(tokens);
             parser.reportErrorsAsExceptions();
             ParseTree tree = parser.line();
             assertTrue(false);
@@ -104,11 +104,11 @@ public class WarmupParserTest {
     @Test
     public void testParserSingleBalanced() {
         CharStream stream = new ANTLRInputStream("()");
-        ExpressionLexer lexer = new ExpressionLexer(stream);
+        BalancedParenthesisLexer lexer = new BalancedParenthesisLexer(stream);
         lexer.reportErrorsAsExceptions();
         try {
             TokenStream tokens = new CommonTokenStream(lexer);
-            ExpressionParser parser = new ExpressionParser(tokens);
+            BalancedParenthesisParser parser = new BalancedParenthesisParser(tokens);
             parser.reportErrorsAsExceptions();
             ParseTree tree = parser.line();
             assertTrue(true);
@@ -120,11 +120,11 @@ public class WarmupParserTest {
     @Test
     public void testParserMultipleBalanced() {
         CharStream stream = new ANTLRInputStream("(()((()))()(()))");
-        ExpressionLexer lexer = new ExpressionLexer(stream);
+        BalancedParenthesisLexer lexer = new BalancedParenthesisLexer(stream);
         lexer.reportErrorsAsExceptions();
         try {
             TokenStream tokens = new CommonTokenStream(lexer);
-            ExpressionParser parser = new ExpressionParser(tokens);
+            BalancedParenthesisParser parser = new BalancedParenthesisParser(tokens);
             parser.reportErrorsAsExceptions();
             ParseTree tree = parser.line();
             assertTrue(true);

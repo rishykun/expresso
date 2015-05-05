@@ -1,6 +1,6 @@
-// Generated from src/expresso/parser/Expression.g4 by ANTLR 4.5
+// Generated from BalancedParenthesis.g4 by ANTLR 4.5
 
-package expresso.parser;
+package expresso.parser.BalancedParenthesis;
 
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
@@ -12,7 +12,7 @@ import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.misc.*;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
-public class ExpressionLexer extends Lexer {
+public class BalancedParenthesisLexer extends Lexer {
 	static { RuntimeMetaData.checkVersion("4.5", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
@@ -85,13 +85,13 @@ public class ExpressionLexer extends Lexer {
 	    }
 
 
-	public ExpressionLexer(CharStream input) {
+	public BalancedParenthesisLexer(CharStream input) {
 		super(input);
 		_interp = new LexerATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 
 	@Override
-	public String getGrammarFileName() { return "Expression.g4"; }
+	public String getGrammarFileName() { return "BalancedParenthesis.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }

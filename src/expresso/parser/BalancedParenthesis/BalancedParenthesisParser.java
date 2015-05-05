@@ -1,6 +1,6 @@
-// Generated from Expression.g4 by ANTLR 4.5
+// Generated from BalancedParenthesis.g4 by ANTLR 4.5
 
-package expresso.parser;
+package expresso.parser.BalancedParenthesis;
 
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
@@ -12,7 +12,7 @@ import java.util.Iterator;
 import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
-public class ExpressionParser extends Parser {
+public class BalancedParenthesisParser extends Parser {
 	static { RuntimeMetaData.checkVersion("4.5", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
@@ -66,7 +66,7 @@ public class ExpressionParser extends Parser {
 	}
 
 	@Override
-	public String getGrammarFileName() { return "Expression.g4"; }
+	public String getGrammarFileName() { return "BalancedParenthesis.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }
@@ -94,7 +94,7 @@ public class ExpressionParser extends Parser {
 	        }
 	    }
 
-	public ExpressionParser(TokenStream input) {
+	public BalancedParenthesisParser(TokenStream input) {
 		super(input);
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
@@ -102,18 +102,18 @@ public class ExpressionParser extends Parser {
 		public BuildContext build() {
 			return getRuleContext(BuildContext.class,0);
 		}
-		public TerminalNode EOF() { return getToken(ExpressionParser.EOF, 0); }
+		public TerminalNode EOF() { return getToken(BalancedParenthesisParser.EOF, 0); }
 		public LineContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_line; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ExpressionListener ) ((ExpressionListener)listener).enterLine(this);
+			if ( listener instanceof BalancedParenthesisListener ) ((BalancedParenthesisListener)listener).enterLine(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ExpressionListener ) ((ExpressionListener)listener).exitLine(this);
+			if ( listener instanceof BalancedParenthesisListener ) ((BalancedParenthesisListener)listener).exitLine(this);
 		}
 	}
 
@@ -141,9 +141,9 @@ public class ExpressionParser extends Parser {
 	}
 
 	public static class BuildContext extends ParserRuleContext {
-		public List<TerminalNode> LEFT_PAREN() { return getTokens(ExpressionParser.LEFT_PAREN); }
+		public List<TerminalNode> LEFT_PAREN() { return getTokens(BalancedParenthesisParser.LEFT_PAREN); }
 		public TerminalNode LEFT_PAREN(int i) {
-			return getToken(ExpressionParser.LEFT_PAREN, i);
+			return getToken(BalancedParenthesisParser.LEFT_PAREN, i);
 		}
 		public List<BuildContext> build() {
 			return getRuleContexts(BuildContext.class);
@@ -151,9 +151,9 @@ public class ExpressionParser extends Parser {
 		public BuildContext build(int i) {
 			return getRuleContext(BuildContext.class,i);
 		}
-		public List<TerminalNode> RIGHT_PAREN() { return getTokens(ExpressionParser.RIGHT_PAREN); }
+		public List<TerminalNode> RIGHT_PAREN() { return getTokens(BalancedParenthesisParser.RIGHT_PAREN); }
 		public TerminalNode RIGHT_PAREN(int i) {
-			return getToken(ExpressionParser.RIGHT_PAREN, i);
+			return getToken(BalancedParenthesisParser.RIGHT_PAREN, i);
 		}
 		public BuildContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -161,11 +161,11 @@ public class ExpressionParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_build; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ExpressionListener ) ((ExpressionListener)listener).enterBuild(this);
+			if ( listener instanceof BalancedParenthesisListener ) ((BalancedParenthesisListener)listener).enterBuild(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ExpressionListener ) ((ExpressionListener)listener).exitBuild(this);
+			if ( listener instanceof BalancedParenthesisListener ) ((BalancedParenthesisListener)listener).exitBuild(this);
 		}
 	}
 
