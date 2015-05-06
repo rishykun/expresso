@@ -29,7 +29,7 @@ public class tests {
     
     //fiddling
     public static void main(String[] args){
-        CharStream stream = new ANTLRInputStream("1       +    x + 2.2 + x*y + 0.1");
+        CharStream stream = new ANTLRInputStream("1       +    x + 2.2 + x*y +xy+0.1");
         ExpressionLexer lexer = new ExpressionLexer(stream);
         TokenStream tokens = new CommonTokenStream(lexer);
         ExpressionParser parser = new ExpressionParser(tokens);

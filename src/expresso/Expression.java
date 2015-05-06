@@ -36,9 +36,11 @@ public interface Expression {
     public Expression multiply(Expression e);
     
     /**
-     * Differentiates this expression with respect to a specified variable
+     * Differentiates this expression with respect to a specified variable using the rules
+     * dc/dx = 0, dx/dx = 1, d(u+v)/dx = du/dx +dv/dx, d(uv)/dx = u*dv/dx + v*du/dx
+     * but does not simplify terms
      * @param v Variable to differentiate with respect to
-     * @return an expression that represents the derivative of this expression with respect to v
+     * @return Expression that represents the derivative of this Expression with respect to v
      */
     public Expression differentiate(Variable v);
       
