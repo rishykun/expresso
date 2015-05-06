@@ -43,7 +43,12 @@ public class Main {
     }
     
     /**
-     * TODO
+     * Outputs the expression typed in by the user, or an
+     * error message if the expression is invalid
+     * 
+     * @param input an expression to perform command operations on
+     * @return an equivalent representation of the expression, or an error 
+     * if the expression is invalid
      */
     private static String handleExpression(String input) {
         throw new RuntimeException("unimplemented");
