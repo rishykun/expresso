@@ -18,27 +18,32 @@ public class Sum implements Expression{
     
     @Override
     public Expression add(Expression e) {
-        throw new RuntimeException("unimplemented");
+        Expression copyOfSummation = new Sum(first, second);
+        return new Sum(copyOfSummation, e);
     }
 
     @Override
     public Expression multiply(Expression e) {
-        throw new RuntimeException("unimplemented");
+        Expression copyOfSummation = new Sum(first, second);
+        return new Product(copyOfSummation, e);
     }
 
     @Override
     public Expression differentiate(Variable v) {
-        throw new RuntimeException("unimplemented");
+        Expression diffFirst = first.differentiate(v);
+        Expression diffSecond = second.differentiate(v);
+        return new Sum(diffFirst, diffSecond);
     }
 
     @Override
     public Expression simplify() {
-        throw new RuntimeException("unimplemented");
+        Expression sum = new Sum(first.simplify(), second.simplify());
+        return sum.simplify();
     }
     
     @Override
     public String toString() {
-        throw new RuntimeException("unimplemented");
+        return "(" + first.toString() + ") + " + second.toString() + ')';
     }
     
     @Override
@@ -48,7 +53,7 @@ public class Sum implements Expression{
     
     @Override
     public int hashCode(){
-        throw new RuntimeException("unimplemented");
+        return first.hashCode() + second.hashCode();
     }
 
 }
