@@ -48,8 +48,7 @@ public interface Expression {
      * @return an expression that represents the derivative of this expression with respect to v
      */
     public Expression differentiate(Variable v);
-    
-    
+      
     /**
      * Simplifies this expression a sum of terms such that for all variables 
      * vari with exponents ei, the term (var1^e1 * var2^e2 * ... * varn^en) appears at most once.
