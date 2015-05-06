@@ -7,7 +7,7 @@ package expresso;
 public interface Expression {
     
     // Datatype definition
-    //  Expression = Empty + Number(n: Integer) + Number(d: Double) + Variable(v: String) 
+    //  Expression = Number(n: Integer) + Number(d: Double) + Variable(v: String) 
     //                  +  Sum(e1: Expression, e2: Expression) + Product(e1: Expression, e2: Expression)
 
     /**
@@ -20,13 +20,6 @@ public interface Expression {
         throw new RuntimeException("unimplemented");
     }
     
-    /**
-     * Creates an empty expression
-     * @return an empty expression
-     */
-    public static Expression Empty(){
-        throw new RuntimeException("unimplemented");
-    }
     
     /**
      * Adds specified expression to this expression

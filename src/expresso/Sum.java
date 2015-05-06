@@ -7,8 +7,13 @@ public class Sum implements Expression{
      * @param e1 first expression
      * @param e2 second expression
      */
+    
+    private final Expression first;
+    private final Expression second;
+    
     public Sum(Expression e1, Expression e2){
-        throw new RuntimeException("unimplemented");
+        first = e1;
+        second = e2;
     }
     
     @Override
@@ -33,6 +38,11 @@ public class Sum implements Expression{
     
     @Override
     public String toString() {
+        throw new RuntimeException("unimplemented");
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
         throw new RuntimeException("unimplemented");
     }
     
