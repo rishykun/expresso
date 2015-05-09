@@ -8,12 +8,16 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.TokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
+import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.junit.Test;
 
 import expresso.parser.BalancedParenthesis.BalancedParenthesisLexer;
 import expresso.parser.BalancedParenthesis.BalancedParenthesisParser;
 import expresso.parser.Expression.ExpressionLexer;
+import expresso.parser.Expression.ExpressionListener;
 import expresso.parser.Expression.ExpressionParser;
+import expresso.Expression;
+import expresso.parser.Expression.ExpressionBaseListener;
 
 public class tests {
     
@@ -35,6 +39,25 @@ public class tests {
         ExpressionParser parser = new ExpressionParser(tokens);
         ParseTree tree = parser.line();
         ((RuleContext)tree).inspect(parser);
+        ParseTreeWalker walker = new ParseTreeWalker();
+        ExpressionBaseListener listener = new ExpressionBaseListener();
+        walker.walk(listener, tree);
+        Expression result = listener.getExpression();
+        System.out.println(result.toString());
+        
+//        stream = new ANTLRInputStream("x + (y*z) + (4*z*z)");
+//        lexer = new ExpressionLexer(stream);
+//        tokens = new CommonTokenStream(lexer);
+//        parser = new ExpressionParser(tokens);
+//        tree = parser.line();
+//        ((RuleContext)tree).inspect(parser);
+//        
+//        stream = new ANTLRInputStream("x + (y*z) + (4*(z+z))");
+//        lexer = new ExpressionLexer(stream);
+//        tokens = new CommonTokenStream(lexer);
+//        parser = new ExpressionParser(tokens);
+//        tree = parser.line();
+//        ((RuleContext)tree).inspect(parser);
     }
 
 }
