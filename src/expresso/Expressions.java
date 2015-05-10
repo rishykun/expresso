@@ -13,7 +13,9 @@ public class Expressions {
      * @throws IllegalArgumentException if the expression or variable is invalid
      */
     public static String differentiate(String expression, String variable) {
-        throw new RuntimeException("unimplemented");
+        Expression parsedInput = Expression.parse(expression);
+        Expression diffInput = parsedInput.differentiate(new Variable(variable));
+        return diffInput.toString();
     }
     
     /**
@@ -27,7 +29,9 @@ public class Expressions {
      * @throws IllegalArgumentException if the expression is invalid
      */
     public static String simplify(String expression) {
-        throw new RuntimeException("unimplemented");
+        Expression parsedInput = Expression.parse(expression);
+        Expression simplified = parsedInput.simplify();
+        return simplified.toString();
     }
     
 }

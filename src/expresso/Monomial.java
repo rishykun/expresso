@@ -67,6 +67,12 @@ public class Monomial extends SimpleExpression {
         return this;
     }
     
+    @Override
+    public boolean checkMonomial() {
+        return true;
+        
+    }
+    
     /**
      * Get the Variable to Exponent TreeMap associated with this Monomial
      * 
