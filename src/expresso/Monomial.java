@@ -57,5 +57,15 @@ public class Monomial extends SimpleExpression {
     public SimpleExpression simplify() {
         return this;
     }
+    
+    /**
+     * Get the Variable to Exponent TreeMap associated with this Monomial
+     * 
+     * @return a TreeMap mapping this Monomial's Variables to their respective exponents
+     */
+    public TreeMap<Variable, Integer> getMap(){
+        TreeMap<Variable, Integer> copyOfMap = new TreeMap<>(exps);
+        return copyOfMap;
+    }
 
 }

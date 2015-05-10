@@ -1,5 +1,17 @@
 package expresso;
 
+import org.antlr.v4.runtime.ANTLRInputStream;
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.RuleContext;
+import org.antlr.v4.runtime.TokenStream;
+import org.antlr.v4.runtime.tree.ParseTree;
+import org.antlr.v4.runtime.tree.ParseTreeWalker;
+
+import expresso.parser.Expression.ExpressionBaseListener;
+import expresso.parser.Expression.ExpressionLexer;
+import expresso.parser.Expression.ExpressionParser;
+
 /**
  * Represents an algebraic expression consisting of zero or more
  * nonnegative numbers and variables.
@@ -17,7 +29,15 @@ public interface Expression {
      * @throws IllegalArgumentException if the expression is invalid
      */
     public static Expression parse(String input) {
-        throw new RuntimeException("unimplemented");
+        CharStream stream = new ANTLRInputStream(input);
+        ExpressionLexer lexer = new ExpressionLexer(stream);
+        TokenStream tokens = new CommonTokenStream(lexer);
+        ExpressionParser parser = new ExpressionParser(tokens);
+        ParseTree tree = parser.line();
+        ParseTreeWalker walker = new ParseTreeWalker();
+        ExpressionBaseListener listener = new ExpressionBaseListener();
+        walker.walk(listener, tree);
+        return listener.getExpression();
     }
     
     
