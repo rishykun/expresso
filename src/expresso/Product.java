@@ -52,8 +52,10 @@ public class Product implements Expression{
     }
     
     @Override
-    public boolean equals(Object obj) {
-        throw new RuntimeException("unimplemented");
+    public boolean equals(Object other) {
+        if (!(other instanceof Product)){return false;}
+        Product otherExpression = (Product) other;
+        return this.toString().equals(otherExpression.toString());
     }
     
     @Override

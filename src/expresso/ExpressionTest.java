@@ -149,11 +149,13 @@ public class ExpressionTest {
      */
     @Test
     public void productDerivativeTest(){
-        assertEquals(one.multiply(zero).add(one.multiply(zero)), onetimesone.differentiate(x));
-        assertEquals(one.multiply(one).add(x.multiply(zero)) ,one.multiply(x).differentiate(x));
-        assertEquals(y.multiply(x.multiply(one).add(x.multiply(one))).add(x.multiply(x).multiply(zero)), y.multiply(x.multiply(x)));
-        assertEquals(x.multiply(zero).add(y.multiply(one)), dxy);
-        assertEquals(xy.multiply(dxplusy).add(xplusy.multiply(dxy)), xytimesxplusy);
+        assertEquals(new Sum(new Product(one, zero), new Product(one, zero)), onetimesone.differentiate(x));
+        assertEquals(new Sum(new Product(one, one), new Product(x, zero)) ,(new Product(one, x)).differentiate(x));
+        assertEquals(new Sum(new Product(y, new Sum(new Product(x, one),
+                new Product(x, one))), new Product(new Product(x, x), zero)),
+                (new Product(y, new Product(x, x))).differentiate(x));
+        assertEquals(new Sum(new Product(x, zero), new Product(y, one)), dxy);
+        assertEquals(new Sum(new Product(xy,dxplusy), new Product(xplusy,dxy)), xytimesxplusy.differentiate(x));
     }
     
     /**
@@ -169,6 +171,6 @@ public class ExpressionTest {
         assertEquals(zero.add(one) ,one.add(x).differentiate(x));
         assertEquals(zero.add(one.add(one)), y.add(x.add(x)).differentiate(x));
         assertEquals(one.add(zero), dxplusy);
-        assertEquals(dxy.add(dxplusy), xyplusxplusy);
+        assertEquals(dxy.add(dxplusy), xyplusxplusy.differentiate(x));
     }
 }

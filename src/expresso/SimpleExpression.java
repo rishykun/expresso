@@ -78,7 +78,7 @@ public class SimpleExpression implements Expression {
     }
     
     public static void main(String[] args){
-        SimpleExpression e1 = new Variable("x").multiply(new Variable("y")).add(new Variable("y").multiply(new Variable("x")).multiply(new Variable("y"))).simplify();
+        SimpleExpression e1 = new Sum(new Variable("x").multiply(new Variable("y")), new Variable("y").multiply(new Variable("x")).multiply(new Variable("y"))).simplify();
         System.out.println(e1);
         
     }

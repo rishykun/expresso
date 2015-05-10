@@ -66,8 +66,8 @@ public class Monomial extends SimpleExpression {
     @Override
     public Expression differentiate(Variable v) {
         TreeMap<String, Integer> vMap = new TreeMap<>(exps);
-        vMap.put(v.toString(), vMap.get(v.toString())-1);
-        return new Monomial(coeff*(exps.get(v.toString())+1), vMap);
+        vMap.put(v.toString(), exps.get(v.toString())-1);
+        return new Monomial(coeff*(exps.get(v.toString())), vMap);
     }
 
     @Override
