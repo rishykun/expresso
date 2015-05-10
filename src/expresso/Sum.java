@@ -48,8 +48,10 @@ public class Sum implements Expression{
     }
     
     @Override
-    public boolean equals(Object obj) {
-        throw new RuntimeException("unimplemented");
+    public boolean equals(Object other) {
+        if (!(other instanceof Sum)){return false;}
+        Sum otherExpression = (Sum) other;
+        return this.toString().equals(otherExpression.toString());
     }
     
     @Override

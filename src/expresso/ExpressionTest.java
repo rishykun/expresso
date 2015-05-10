@@ -88,6 +88,7 @@ public class ExpressionTest {
     public static void setUpBeforeClass(){
         one = new Number(1);
         zero = new Number(0);
+        two = new Number(2);
         x = new Variable("x");
         y = new Variable("y");
         xy = new Product(x,y);
