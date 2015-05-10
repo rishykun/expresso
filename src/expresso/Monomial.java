@@ -15,6 +15,11 @@ public class Monomial extends SimpleExpression {
         monomial(components);
     }
     
+    public Monomial(Number coefficient, Expression variableTerm){
+        coeff = coefficient;
+        term = variableTerm;
+    }
+    
     private void monomial(TreeMap<String, Integer> components){
        for (String var: components.keySet()){
            Variable variable = new Variable(var);
@@ -23,6 +28,14 @@ public class Monomial extends SimpleExpression {
                term = term.multiply(variable);
        term = term.simplify(); //removes the 1 in front
        }
+    }
+    
+    public Number getCoefficient(){
+        return coeff;
+    }
+    
+    public Monomial addCoeff(Number N){
+        return new Monomial(new Number(Double.parseDouble(coeff.toString())+Double.parseDouble(N.toString())), term);
     }
     
     @Override
