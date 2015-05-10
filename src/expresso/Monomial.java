@@ -1,42 +1,42 @@
 package expresso;
 
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.TreeMap;
 
 public class Monomial extends SimpleExpression {
     
     private double coeff;
-    private Expression term = new Number(1);
-    protected TreeMap<String, Integer> exps = new TreeMap<>();
+    protected Map<String, Integer> exps = new TreeMap<>();
     
     public Monomial(){};
     
     public Monomial(int n, TreeMap<String, Integer> components){
         coeff = n;
-        monomial(components);
-        exps = (TreeMap<String, Integer>) Collections.unmodifiableMap(exps);
+        exps = Collections.unmodifiableMap(components);
     }
     
     public Monomial(double d, TreeMap<String, Integer> components){
         coeff = d;
-        monomial(components);
-        exps = (TreeMap<String, Integer>) Collections.unmodifiableMap(exps);
+        exps = Collections.unmodifiableMap(components);
+    }
+    
+    public Monomial(int n){
+        coeff = n;
+        exps = Collections.emptyMap();
+    }
+    
+    public Monomial(double d){
+        coeff = d;
+        exps = Collections.emptyMap();
     }
     
     public Monomial(String v){
         coeff = 1;
         exps.put(v, 1);
-        exps = (TreeMap<String, Integer>) Collections.unmodifiableMap(exps);
-    }
-    
-    private void monomial(TreeMap<String, Integer> components){
-       for (String var: components.keySet()){
-           exps.put(var, components.get(var));
-           Variable variable = new Variable(var);
-           for (int i = 0; i < components.get(var); i++)
-               term = term.multiply(variable);
-       term = term.simplify(); //removes the 1 in front
-       }
+        exps = Collections.unmodifiableMap(exps);
     }
     
     public double getCoefficient(){
@@ -44,22 +44,30 @@ public class Monomial extends SimpleExpression {
     }
     
     public Monomial addCoeff(Number N){
-        return new Monomial(coeff+Double.parseDouble(N.toString()), exps);
+        return new Monomial(coeff+Double.parseDouble(N.toString()), new TreeMap<>(exps));
     }
     
     @Override
     public Expression add(Expression e) {
-        return (new Number(coeff)).multiply(term.add(e));
+        return new Sum(this, e);
     }
 
     @Override
     public Expression multiply(Expression e) {
-        return (new Number(coeff)).multiply(term.multiply(e));
+        return new Product(this, e);
+    }
+
+    public Monomial multiply(Monomial m){
+        TreeMap<String, Integer> vMap = new TreeMap<>(getMap());
+        m.getMap().forEach((key, value) -> vMap.merge(key, value, (a,b) -> a+b));
+        return new Monomial(coeff*m.getCoefficient(), vMap);
     }
 
     @Override
     public Expression differentiate(Variable v) {
-        return (new Number(coeff)).multiply(term.differentiate(v));
+        TreeMap<String, Integer> vMap = new TreeMap<>(exps);
+        vMap.put(v.toString(), vMap.get(v.toString())-1);
+        return new Monomial(coeff*(exps.get(v.toString())+1), vMap);
     }
 
     @Override
@@ -73,13 +81,27 @@ public class Monomial extends SimpleExpression {
         
     }
     
+    @Override
+    public Iterator<Monomial> iterator(){
+        return Arrays.asList(this).iterator();
+    }
+    
+    @Override
+    public String toString(){
+        String out = String.valueOf(coeff);
+        for (String v:exps.keySet()){
+            for (int i =0; i<exps.get(v); i++)
+                out += "*"+v;
+        }
+        return out;
+    }
     /**
      * Get the Variable to Exponent TreeMap associated with this Monomial
      * 
      * @return a TreeMap mapping this Monomial's Variables to their respective exponents
      */
-    public TreeMap<String, Integer> getMap(){
-        TreeMap<String, Integer> copyOfMap = new TreeMap<>(exps);
+    public Map<String, Integer> getMap(){
+        Map<String, Integer> copyOfMap = new TreeMap<>(exps);
         return copyOfMap;
     }
 

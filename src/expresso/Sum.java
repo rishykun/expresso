@@ -49,8 +49,8 @@ public class Sum implements Expression{
         SimpleExpression simplified = new Number(0);
         while (true) {
             compareVal = comparator.compare(first, second);
-                if (first.equals(second)){
-                    simplified.simpleAdd(first.addCoeff(new Number(second.getCoefficient())));
+                if (first.getMap().equals(second.getMap())){
+                    simplified = simplified.simpleAdd(first.addCoeff(new Number(second.getCoefficient())));
                     if (!firstIter.hasNext() || !secondIter.hasNext()){
                         break;
                     }
@@ -58,15 +58,18 @@ public class Sum implements Expression{
                     second = secondIter.next();
                 }
                 else if (compareVal == 1){
-                    simplified.simpleAdd(second);
+                    System.out.println("greater");
+                    simplified = simplified.simpleAdd(second);
                     if (!secondIter.hasNext()){
+                        simplified = simplified.simpleAdd(first);
                         break;
                     }
                     second = secondIter.next();                    
                 }
                 else if (compareVal == -1){
-                    simplified.simpleAdd(first);
+                    simplified = simplified.simpleAdd(first);
                     if (!firstIter.hasNext()){
+                        simplified = simplified.simpleAdd(second);
                         break;
                     }
                     first = firstIter.next();
@@ -79,7 +82,7 @@ public class Sum implements Expression{
         while (secondIter.hasNext()){
             simplified = simplified.simpleAdd(secondIter.next());
         }
-        return simplified.truncate();//removes 0
+        return simplified;
     }
     
     @Override

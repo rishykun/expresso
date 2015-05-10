@@ -16,7 +16,7 @@ public class Variable extends Monomial{
     public Variable(String v){
         super(v);
         variable = v; 
-        exps = (TreeMap<String, Integer>) Collections.unmodifiableMap(exps);
+        exps = Collections.unmodifiableMap(exps);
     }
     
     @Override
@@ -57,7 +57,9 @@ public class Variable extends Monomial{
     
     @Override
     public boolean equals(Object obj) {
-        throw new RuntimeException("unimplemented");
+        if (!(obj instanceof Variable)){return false;}
+        Variable otherVariable = (Variable) obj;
+        return toString().equals(otherVariable.toString());
     }
     
     

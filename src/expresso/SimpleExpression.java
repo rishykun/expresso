@@ -43,8 +43,6 @@ public class SimpleExpression implements Expression {
     
     public boolean checkMonomial() {
         return isMonomial;
-        
-        
     }
 
     public Iterator<Monomial> iterator(){
@@ -68,5 +66,20 @@ public class SimpleExpression implements Expression {
     
     public SimpleExpression truncate(){
         return remaining;
+    }
+    
+    @Override
+    public String toString(){
+        String out = leading.toString() + "+" + remaining.toString();
+        if (out.endsWith("+0")){
+            out = out.substring(0, out.length()-2);
+        }
+        return out;
+    }
+    
+    public static void main(String[] args){
+        SimpleExpression e1 = new Variable("x").multiply(new Variable("y")).add(new Variable("y").multiply(new Variable("x")).multiply(new Variable("y"))).simplify();
+        System.out.println(e1);
+        
     }
 }

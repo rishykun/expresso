@@ -1,14 +1,15 @@
 package expresso;
 
 import java.util.Comparator;
+import java.util.Map;
 import java.util.TreeMap;
 
 public class MonomialComparator implements Comparator<Monomial>{
 
     @Override
     public int compare(Monomial first, Monomial second) {
-        TreeMap<String, Integer> firstMap = first.getMap();
-        TreeMap<String, Integer> secondMap = second.getMap();
+        Map<String, Integer> firstMap = first.getMap();
+        Map<String, Integer> secondMap = second.getMap();
         int largestOfFirst = -1;
         int largestOfSecond = -1;
         for (int exp : firstMap.values()){

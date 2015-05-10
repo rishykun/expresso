@@ -13,10 +13,10 @@ public class Number extends Monomial {
      * @param n integer to represent
      */
     public Number(int n) {
-        super(n, new TreeMap<String, Integer> (Collections.emptyMap()));
+        super(n);
         this.numString = Integer.toString(n);
         isInteger = true;
-        exps = (TreeMap<String, Integer>) Collections.unmodifiableMap(exps);
+        exps = Collections.unmodifiableMap(exps);
     }
     
     /**
@@ -24,9 +24,10 @@ public class Number extends Monomial {
      * @param d decimal to represent
      */
     public Number(double d) {
+        super(d);
         this.numString = Double.toString(d);
         isInteger = false;
-        exps = (TreeMap<String, Integer>) Collections.unmodifiableMap(exps);
+        exps = Collections.unmodifiableMap(exps);
     }
     
     @Override
