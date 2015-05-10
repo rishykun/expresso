@@ -1,8 +1,5 @@
 package expresso;
 
-import java.util.Comparator;
-import java.util.Iterator;
-
 public class Sum implements Expression{
 
     /**

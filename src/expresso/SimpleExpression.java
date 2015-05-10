@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class SimpleExpression implements Expression {
+public class SimpleExpression implements Expression, Iterable<Monomial>  {
 
     private Monomial leading;
     private SimpleExpression remaining;
@@ -44,7 +44,8 @@ public class SimpleExpression implements Expression {
     public boolean checkMonomial() {
         return isMonomial;
     }
-
+    
+    @Override
     public Iterator<Monomial> iterator(){
         List<Monomial> listOfTerms = new ArrayList<Monomial>();
         SimpleExpression currentExpression = this;

@@ -40,7 +40,24 @@ public class Product implements Expression{
 
     @Override
     public SimpleExpression simplify() {
-        throw new RuntimeException("unimplemented");
+        SimpleExpression first = this.first.simplify();
+        SimpleExpression second= this.second.simplify();
+        Expression summand;
+        if (second.checkMonomial()){
+            first = second.simplify();
+            second = first.simplify();
+        }
+        if (first.checkMonomial()){
+            summand = first.leading();
+            for (Monomial m:second){
+                summand = summand.add(m);
+            }
+            return summand.simplify();
+        }
+        else {
+            return (new Sum(first.leading().multiply(second), first.truncate().multiply(second))).simplify();
+        }
+        
     }
     
     @Override
