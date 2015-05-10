@@ -1,15 +1,15 @@
 package expresso;
 
 import java.util.Iterator;
-import java.util.TreeMap;
 
 public class SimpleExpression implements Expression {
 
     private Monomial leading;
-    private Expression remaining = new Number(0);
+    private SimpleExpression remaining;
     
-    public SimpleExpression(Number n, TreeMap<String, Integer> components){
-        leading = new Monomial(n, components);
+    public SimpleExpression(Monomial m, SimpleExpression e){
+        leading = m;
+        remaining = e;
     }
     
     public SimpleExpression(){};
@@ -17,6 +17,10 @@ public class SimpleExpression implements Expression {
     @Override
     public Expression add(Expression e) {
         return leading.add(remaining).add(e);
+    }
+    
+    public SimpleExpression simpleAdd(Monomial m){
+        return new SimpleExpression(m, this);
     }
 
     @Override
@@ -36,5 +40,9 @@ public class SimpleExpression implements Expression {
 
     public Iterator<Monomial> iterator(){
         return new SimpleExpressionIterator(this);
+    }
+    
+    public SimpleExpression truncate(){
+        return remaining;
     }
 }
