@@ -1,5 +1,8 @@
 package expresso;
 
+import java.util.Comparator;
+import java.util.Iterator;
+
 public class Sum implements Expression{
 
     /**
@@ -37,9 +40,46 @@ public class Sum implements Expression{
 
     @Override
     public SimpleExpression simplify() {
-        SimpleExpression firstSimp = first.simplify();
-        SimpleExpression secondSimp = second.simplify();
-        throw new RuntimeException("unimplemented");
+        Iterator<Monomial> firstIter = first.simplify().iterator();
+        Iterator<Monomial> secondIter = second.simplify().iterator();
+        Monomial first = firstIter.next();
+        Monomial second = secondIter.next();
+        int compareVal;
+        Comparator<Monomial> comparator = new MonomialComparator();
+        SimpleExpression simplified = new Number(0);
+        while (true) {
+            compareVal = comparator.compare(first, second);
+                if (first.equals(second)){
+                    simplified.simpleAdd(first.addCoeff(new Number(second.getCoefficient())));
+                    if (!firstIter.hasNext() || !secondIter.hasNext()){
+                        break;
+                    }
+                    first = firstIter.next();
+                    second = secondIter.next();
+                }
+                else if (compareVal == 1){
+                    simplified.simpleAdd(second);
+                    if (!secondIter.hasNext()){
+                        break;
+                    }
+                    second = secondIter.next();                    
+                }
+                else if (compareVal == -1){
+                    simplified.simpleAdd(first);
+                    if (!firstIter.hasNext()){
+                        break;
+                    }
+                    first = firstIter.next();
+                }
+
+            }
+        while (firstIter.hasNext()){
+            simplified = simplified.simpleAdd(firstIter.next());
+        }
+        while (secondIter.hasNext()){
+            simplified = simplified.simpleAdd(secondIter.next());
+        }
+        return simplified.truncate();//removes 0
     }
     
     @Override
