@@ -7,8 +7,8 @@ public class MonomialComparator implements Comparator<Monomial>{
 
     @Override
     public int compare(Monomial first, Monomial second) {
-        TreeMap<Variable, Integer> firstMap = first.getMap();
-        TreeMap<Variable, Integer> secondMap = second.getMap();
+        TreeMap<String, Integer> firstMap = first.getMap();
+        TreeMap<String, Integer> secondMap = second.getMap();
         int largestOfFirst = -1;
         int largestOfSecond = -1;
         for (int exp : firstMap.values()){

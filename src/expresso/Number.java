@@ -1,5 +1,8 @@
 package expresso;
 
+import java.util.Collections;
+import java.util.TreeMap;
+
 public class Number extends Monomial {
     
     private final String numString;
@@ -10,8 +13,10 @@ public class Number extends Monomial {
      * @param n integer to represent
      */
     public Number(int n) {
+        super(n, new TreeMap<String, Integer> (Collections.emptyMap()));
         this.numString = Integer.toString(n);
         isInteger = true;
+        exps = (TreeMap<String, Integer>) Collections.unmodifiableMap(exps);
     }
     
     /**
@@ -21,6 +26,7 @@ public class Number extends Monomial {
     public Number(double d) {
         this.numString = Double.toString(d);
         isInteger = false;
+        exps = (TreeMap<String, Integer>) Collections.unmodifiableMap(exps);
     }
     
     @Override
@@ -39,6 +45,11 @@ public class Number extends Monomial {
             return new Product(copyOfNumber, e);
         }
         return new Product(new Number(Double.parseDouble(this.numString)), e);
+    }
+    
+    public Monomial multiply(Monomial m){
+        TreeMap<String, Integer> vMap = new TreeMap<>(m.getMap());
+        return new Monomial(Double.parseDouble(numString)*m.getCoefficient(), vMap);
     }
 
     @Override

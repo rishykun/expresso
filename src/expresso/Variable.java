@@ -1,7 +1,10 @@
 package expresso;
 
+import java.util.Collections;
+import java.util.TreeMap;
 
-public class Variable extends SimpleExpression{
+
+public class Variable extends Monomial{
 
     /**
      * Creates a variable expression representing the specified variable
@@ -9,8 +12,11 @@ public class Variable extends SimpleExpression{
      */
     
     private final String variable;
+    
     public Variable(String v){
+        super(v);
         variable = v; 
+        exps = (TreeMap<String, Integer>) Collections.unmodifiableMap(exps);
     }
     
     @Override
@@ -24,15 +30,24 @@ public class Variable extends SimpleExpression{
         Expression copyOfVariable = new Variable(variable);
         return new Product(copyOfVariable, e);
     }
-
+    
+    public Monomial multiply(Monomial m){
+        TreeMap<String, Integer> vMap = new TreeMap<>(m.getMap());
+        if (vMap.keySet().contains(variable)){
+            vMap.put(variable, vMap.get(variable)+1);
+            return new Monomial(m.getCoefficient(), vMap);
+        }
+        else{
+            vMap.put(variable, 1);
+            return new Monomial(m.getCoefficient(), vMap);
+        }
+    }
+    
     @Override
     public Expression differentiate(Variable v) {
         if (v.toString().equals(variable)) {
             return new Number(1);
-        } return new Number(0);
-        
-        
-        
+        } return new Number(0); 
     }
 
     @Override
