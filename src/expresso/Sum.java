@@ -37,11 +37,51 @@ public class Sum implements Expression{
         Expression diffSecond = second.differentiate(v);
         return new Sum(diffFirst, diffSecond);
     }
-
+    
     @Override
     public SimpleExpression simplify() {
+        SimpleExpression first = this.first.simplify();
+        SimpleExpression second = this.second.simplify();
+        Monomial firstMon = first.leading();
+        SimpleExpression firstRemainder = first.truncate();
+        Monomial secondMon = second.leading();
+        SimpleExpression secondRemainder = second.truncate();
+        Monomial addedTerm;
+        int compareVal =  new MonomialComparator().compare(firstMon, secondMon);
+        if (firstMon.equals(secondMon)){
+            addedTerm =  firstMon.addCoeff(new Number(secondMon.getCoefficient()));
+            if (first.checkMonomial()){
+                if (second.checkMonomial()){
+                    return addedTerm;
+                }
+                else return secondRemainder.simpleAdd(addedTerm);
+            }
+            else if (second.checkMonomial()){
+                return firstRemainder.simpleAdd(addedTerm);
+            }
+            else return firstRemainder.add(secondRemainder).simplify().simpleAdd(addedTerm);
+            
+        }
+        else if (compareVal > 0){
+            addedTerm = secondMon;
+            if (second.checkMonomial()){
+                return first.simpleAdd(addedTerm);
+            }
+            else return secondRemainder.add(first).simplify();
+        }
+        else {
+            addedTerm = firstMon;
+            if (first.checkMonomial()){
+                return second.simpleAdd(addedTerm);
+            }
+            else return firstRemainder.add(second).simplify();
+        }    
+    }
+    
+    /*
+    public SimpleExpression simplify2() {
         Iterator<Monomial> firstIter = first.simplify().iterator();
-        Iterator<Monomial> secondIter = second.simplify().iterator();
+        Iterator<Monomial> secondIter = second.simplify().iterator();   
         Monomial first = firstIter.next();
         Monomial second = secondIter.next();
         int compareVal;
@@ -58,7 +98,6 @@ public class Sum implements Expression{
                     second = secondIter.next();
                 }
                 else if (compareVal == 1){
-                    System.out.println("greater");
                     simplified = simplified.simpleAdd(second);
                     if (!secondIter.hasNext()){
                         simplified = simplified.simpleAdd(first);
@@ -83,7 +122,7 @@ public class Sum implements Expression{
             simplified = simplified.simpleAdd(secondIter.next());
         }
         return simplified;
-    }
+    }*/
     
     @Override
     public String toString() {
