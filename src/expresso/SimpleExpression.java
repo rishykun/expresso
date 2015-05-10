@@ -45,4 +45,8 @@ public class SimpleExpression implements Expression {
     public SimpleExpression truncate(){
         return remaining;
     }
+    
+    public static void main(String[] args){
+        
+    }
 }
