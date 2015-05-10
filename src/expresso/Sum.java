@@ -36,9 +36,10 @@ public class Sum implements Expression{
     }
 
     @Override
-    public Expression simplify() {
-        Expression sum = new Sum(first.simplify(), second.simplify());
-        return sum.simplify();
+    public SimpleExpression simplify() {
+        SimpleExpression firstSimp = first.simplify();
+        SimpleExpression secondSimp = second.simplify();
+        throw new RuntimeException("unimplemented");
     }
     
     @Override

@@ -1,7 +1,7 @@
 package expresso;
 
 
-public class Variable implements Expression{
+public class Variable extends SimpleExpression{
 
     /**
      * Creates a variable expression representing the specified variable
@@ -36,8 +36,8 @@ public class Variable implements Expression{
     }
 
     @Override
-    public Expression simplify() {
-        throw new RuntimeException("unimplemented");
+    public SimpleExpression simplify() {
+        return this;
     }
     
     @Override

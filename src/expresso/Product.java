@@ -8,8 +8,8 @@ public class Product implements Expression{
      * @param e2 second expression
      */
     
-    public final Expression first;
-    public final Expression second;
+    private final Expression first;
+    private final Expression second;
     
     public Product(Expression e1, Expression e2){
         first = e1;
@@ -39,7 +39,7 @@ public class Product implements Expression{
     }
 
     @Override
-    public Expression simplify() {
+    public SimpleExpression simplify() {
         throw new RuntimeException("unimplemented");
     }
     

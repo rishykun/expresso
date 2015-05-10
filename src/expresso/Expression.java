@@ -51,6 +51,6 @@ public interface Expression {
      * As the simplified expression is read left-to-right, the largest exponent in each term must be non-increasing.
      * @return an expression that represents the simplified version of this expression 
      */
-    public Expression simplify();
+    public SimpleExpression simplify();
        
 }

@@ -1,6 +1,6 @@
 package expresso;
 
-public class Number implements Expression{
+public class Number extends Monomial {
     
     private final String numString;
     private final boolean isInteger;
@@ -47,9 +47,8 @@ public class Number implements Expression{
     }
 
     @Override
-    public Expression simplify() {
-        if (this.isInteger){return new Number(Integer.parseInt(this.numString));}
-        return new Number(Double.parseDouble(this.numString));
+    public SimpleExpression simplify() {
+        return this;
     }
     
     /**
