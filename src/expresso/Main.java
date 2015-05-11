@@ -10,6 +10,9 @@ import java.io.InputStreamReader;
 public class Main {
     
     private static final String COMMAND_PREFIX = "!";
+    private static Expression currentExpression;
+    private static final String invalidExpressionError = "ParseError: Please enter a valid expression!";
+    private static final String invalidCommandError = "ParseError: Please enter a valid command!";
     
     /**
      * Read expression and command inputs from the console and output results.
@@ -51,7 +54,17 @@ public class Main {
      * if the expression is invalid
      */
     private static String handleExpression(String input) {
-        throw new RuntimeException("unimplemented");
+        try{
+            Expression currentExpression = Expression.parse(input);
+            return currentExpression.toString();
+        } 
+        catch (RuntimeException e){
+            return invalidExpressionError;
+            
+            
+        }
+       
+        
     }
     
     /**
@@ -63,7 +76,17 @@ public class Main {
      * not recognized
      */
     private static String handleCommand(String substring) {
-        throw new RuntimeException("unimplemented");
+        if (substring.equals("simplify")){
+            Expression simplifiedExpression = currentExpression.simplify();
+            return simplifiedExpression.toString();
+        } else if (substring.startsWith("d/d")){
+            String variable = substring.substring(0, 3);
+            Expression diffExpression = new Variable(variable);
+            return diffExpression.toString();
+        } else {
+            return invalidCommandError;
+        }
+        
     }
     
 }

@@ -34,6 +34,7 @@ public interface Expression {
         ExpressionLexer lexer = new ExpressionLexer(stream);
         TokenStream tokens = new CommonTokenStream(lexer);
         ExpressionParser parser = new ExpressionParser(tokens);
+        parser.reportErrorsAsExceptions();
         ParseTree tree = parser.line();
         ParseTreeWalker walker = new ParseTreeWalker();
         ExpressionBaseListener listener = new ExpressionBaseListener();
