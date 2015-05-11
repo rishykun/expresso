@@ -111,11 +111,11 @@ public class SimpleExpression implements Expression, Iterable<Monomial>  {
     }
     
     public static void main(String[] args){
-        SimpleExpression e1 = new Sum(new Variable("x").multiply(new Variable("y")), new Variable("y").multiply(new Variable("x")).multiply(new Variable("y"))).simplify();
-        SimpleExpression e2 = (new Product(new Sum(new Variable("x"), new Number(1)), new Sum(new Variable("x"), new Number(2)))).simplify();
+        SimpleExpression e1 = Expression.parse("xy+y*x*x").simplify();
+        SimpleExpression e2 = Expression.parse("(x+1)*(x+2)").simplify();
         System.out.println(e1);
         System.out.println(e2);
-        SimpleExpression e3 = new Sum(new Product(new Variable("x"), new Variable("y")), new Product(new Variable("y"), new Variable("z"))).simplify();
+        SimpleExpression e3 = Expression.parse("xy+yz").simplify();
         System.out.println(e3);
     }
 }
