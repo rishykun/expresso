@@ -179,7 +179,7 @@ public class Sum implements Expression{
     
     @Override
     public String toString() {
-        return "(" + first.toString() + ") + " + second.toString() + ')';
+        return "(" + first.toString() + ") + (" + second.toString() + ')';
     }
     
     @Override
