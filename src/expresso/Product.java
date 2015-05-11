@@ -1,16 +1,19 @@
 package expresso;
 
 public class Product implements Expression{
-
+    
+    private final Expression first;
+    private final Expression second;
+    
+    //Abstraction function
+    //Rep Invariant
+    //Rep Exposure
+    
     /**
      * Constructs the product of two specified expressions
      * @param e1 first expression
      * @param e2 second expression
      */
-    
-    private final Expression first;
-    private final Expression second;
-    
     public Product(Expression e1, Expression e2){
         first = e1;
         second = e2;

@@ -1,16 +1,19 @@
 package expresso;
 
 public class Sum implements Expression{
-
+    
+    private final Expression first;
+    private final Expression second;
+    
+    //Abstraction function
+    //Rep Invariant
+    //Rep Exposure
+    
     /**
      * Constructs the sum of two specified expressions
      * @param e1 first expression
      * @param e2 second expression
      */
-    
-    private final Expression first;
-    private final Expression second;
-    
     public Sum(Expression e1, Expression e2){
         first = e1;
         second = e2;
@@ -98,6 +101,13 @@ public class Sum implements Expression{
                 //return second.simpleAdd(addedTerm);
             }
             else {
+                System.out.println("here");
+                System.out.println(first.checkMonomial());
+                System.out.println(first);
+                System.out.println(second);
+                System.out.println(firstRemainder);
+                System.out.println(second);
+                System.out.println(addedTerm);
                 SimpleExpression s = firstRemainder.add(second).simplify().simpleAdd(addedTerm);
                 System.out.println("Simplified "+ this.toString() + "to" + s.toString());
                 return s;

@@ -1,22 +1,27 @@
 package expresso;
 
 import java.util.Collections;
-import java.util.TreeMap;
 
 
 public class Variable extends Monomial{
-
+    
+    private final String variable;
+    
+    //Abstraction function
+    //Rep Invariant
+    //Rep Exposure
+    
     /**
      * Creates a variable expression representing the specified variable
      * @param v variable to represent
      */
-    
-    private final String variable;
-    
     public Variable(String v){
-        super(v);
+        //super(v);
         variable = v; 
+        coeff = 1;
+        exps.put(v, 1);
         exps = Collections.unmodifiableMap(exps);
+        isMonomial = true;
     }
     
     @Override
@@ -31,6 +36,8 @@ public class Variable extends Monomial{
         return new Product(copyOfVariable, e);
     }
     
+    /*
+    @Override
     public Monomial multiply(Monomial m){
         TreeMap<String, Integer> vMap = new TreeMap<>(m.getMap());
         if (vMap.keySet().contains(variable)){
@@ -42,6 +49,7 @@ public class Variable extends Monomial{
             return new Monomial(m.getCoefficient(), vMap);
         }
     }
+    */
     
     @Override
     public Expression differentiate(Variable v) {

@@ -4,26 +4,37 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * Represents a simplified expression
+ */
 public class SimpleExpression implements Expression, Iterable<Monomial>  {
 
     Monomial leading;
     private SimpleExpression remaining;
-    private boolean isMonomial = false;
+    protected boolean isMonomial = false;
+    
+    //Abstraction function
+    //Rep Invariant
+    //Rep Exposure
     
     public SimpleExpression(Monomial m, SimpleExpression e){
         leading = m;
         remaining = e;
     }
     
-    public SimpleExpression(){
-        
-    }
+    public SimpleExpression(){}
     
     @Override
     public Expression add(Expression e) {
         return leading.add(remaining).add(e);
     }
     
+    /**
+     * Adds a monomial to the front of a simple expression
+     * @param m m is not equal to the first term of this simple expression 
+     *          and max exponent of m must be >= max exponent of the first term as well
+     * @return this simple expression with the monomial as the leading term
+     */
     public SimpleExpression simpleAdd(Monomial m){
         return new SimpleExpression(m, this);
     }
@@ -43,10 +54,19 @@ public class SimpleExpression implements Expression, Iterable<Monomial>  {
         return this;
     }
     
+    /**
+     * Checks if a simplified expression is a monomial or not
+     * @return if this simplified expression is a monomial
+     */
     public boolean checkMonomial() {
         return isMonomial;
     }
     
+    /**
+     * Returns an iterator over the monomials of a simple expression
+     * @return Iterator over monomials of this expression in non-decreasing
+     *          order of max exponent
+     */
     @Override
     public Iterator<Monomial> iterator(){
         List<Monomial> listOfTerms = new ArrayList<Monomial>();
@@ -63,10 +83,20 @@ public class SimpleExpression implements Expression, Iterable<Monomial>  {
         
     }
     
+    /**
+     * Gets the leading monomial term of a simplified expression
+     * @return leading monomial term of this simplified expression
+     */
     public Monomial leading(){
         return leading;
     }
     
+    /**
+     * Gets the remaining terms after the leading monomial term of a
+     * simplified expression
+     * @return the remaining terms after the leading monomial term of this
+     *          simplified expression
+     */
     public SimpleExpression truncate(){
         return remaining;
     }
@@ -85,5 +115,7 @@ public class SimpleExpression implements Expression, Iterable<Monomial>  {
         SimpleExpression e2 = (new Product(new Sum(new Variable("x"), new Number(1)), new Sum(new Variable("x"), new Number(2)))).simplify();
         System.out.println(e1);
         System.out.println(e2);
+        SimpleExpression e3 = new Sum(new Product(new Variable("x"), new Variable("y")), new Product(new Variable("y"), new Variable("z"))).simplify();
+        System.out.println(e3);
     }
 }

@@ -1,22 +1,30 @@
 package expresso;
 
 import java.util.Collections;
-import java.util.TreeMap;
 
+/**
+ *  Represents a number Expression
+ */
 public class Number extends Monomial {
     
     private final String numString;
     private final boolean isInteger;
-
+    
+    //Abstraction function
+    //Rep Invariant
+    //Rep Exposure
+    
     /**
      * Creates a number expression representing the specified integer
      * @param n integer to represent
      */
     public Number(int n) {
-        super(n);
+        //super(n);
+        coeff = n;
         this.numString = Integer.toString(n);
         isInteger = true;
         exps = Collections.unmodifiableMap(exps);
+        isMonomial = true;
     }
     
     /**
@@ -24,10 +32,12 @@ public class Number extends Monomial {
      * @param d decimal to represent
      */
     public Number(double d) {
-        super(d);
+        //super(d);
+        coeff = d;
         this.numString = Double.toString(d);
         isInteger = false;
         exps = Collections.unmodifiableMap(exps);
+        isMonomial = true;
     }
     
     @Override
@@ -48,11 +58,6 @@ public class Number extends Monomial {
         return new Product(new Number(Double.parseDouble(this.numString)), e);
     }
     
-    public Monomial multiply(Monomial m){
-        TreeMap<String, Integer> vMap = new TreeMap<>(m.getMap());
-        return new Monomial(Double.parseDouble(numString)*m.getCoefficient(), vMap);
-    }
-
     @Override
     public Expression differentiate(Variable v) {
         return new Number(0);
