@@ -59,7 +59,8 @@ public class Main {
             return currentExpression.toString();
         } 
         catch (IllegalArgumentException e){
-            return invalidExpressionError;
+            throw new IllegalArgumentException();
+            //return invalidExpressionError;
             
             
         }
