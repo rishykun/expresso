@@ -33,9 +33,16 @@ public class Number extends Monomial {
      */
     public Number(double d) {
         //super(d);
-        coeff = d;
-        this.numString = Double.toString(d);
-        isInteger = false;
+        if (Math.round(d) - d == 0) {
+            int n = Integer.parseInt(String.valueOf(d).substring(0, String.valueOf(d).indexOf(".")));
+            coeff = n;
+            numString = Integer.toString(n);
+            isInteger = true;
+        } else {
+            coeff = d;
+            this.numString = Double.toString(d);
+            isInteger = false;
+        }
         exps = Collections.unmodifiableMap(exps);
         isMonomial = true;
     }
