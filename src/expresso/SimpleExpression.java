@@ -6,7 +6,7 @@ import java.util.List;
 
 public class SimpleExpression implements Expression, Iterable<Monomial>  {
 
-    private Monomial leading;
+    Monomial leading;
     private SimpleExpression remaining;
     private boolean isMonomial = false;
     
@@ -15,7 +15,9 @@ public class SimpleExpression implements Expression, Iterable<Monomial>  {
         remaining = e;
     }
     
-    public SimpleExpression(){};
+    public SimpleExpression(){
+        
+    }
     
     @Override
     public Expression add(Expression e) {
@@ -80,7 +82,8 @@ public class SimpleExpression implements Expression, Iterable<Monomial>  {
     
     public static void main(String[] args){
         SimpleExpression e1 = new Sum(new Variable("x").multiply(new Variable("y")), new Variable("y").multiply(new Variable("x")).multiply(new Variable("y"))).simplify();
+        SimpleExpression e2 = (new Product(new Sum(new Variable("x"), new Number(1)), new Sum(new Variable("x"), new Number(2)))).simplify();
         System.out.println(e1);
-        
+        System.out.println(e2);
     }
 }

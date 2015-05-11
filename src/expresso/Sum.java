@@ -37,41 +37,87 @@ public class Sum implements Expression{
     
     @Override
     public SimpleExpression simplify() {
+        System.out.println("Simplifying "+this.toString());
         SimpleExpression first = this.first.simplify();
         SimpleExpression second = this.second.simplify();
+        System.out.println("Pre-simplify "+this.toString());
+        System.out.println("Simplified first: "+first.toString());
+        System.out.println("Simplified second: "+second.toString());
+        if (first.equals(new Number(0))) {
+            System.out.println("Simplified "+ this.toString() + "to" + second.toString());
+            return second;
+        }
+        else if (second.equals(new Number(0))){
+            System.out.println("Simplified "+ this.toString() + "to" + first.toString());
+            return first;
+        }
         Monomial firstMon = first.leading();
         SimpleExpression firstRemainder = first.truncate();
         Monomial secondMon = second.leading();
         SimpleExpression secondRemainder = second.truncate();
         Monomial addedTerm;
         int compareVal =  new MonomialComparator().compare(firstMon, secondMon);
-        if (firstMon.equals(secondMon)){
+        System.out.println(firstMon);
+        System.out.println(secondMon);
+        System.out.println(firstMon.equals(secondMon));
+        if (firstMon.getMap().equals(secondMon.getMap())){
+            System.out.println("Equal leading monomials");
             addedTerm =  firstMon.addCoeff(new Number(secondMon.getCoefficient()));
             if (first.checkMonomial()){
                 if (second.checkMonomial()){
+                    System.out.println("Simplified "+ this.toString() + "to" + addedTerm.toString());
                     return addedTerm;
                 }
-                else return secondRemainder.simpleAdd(addedTerm);
+                else {
+                    SimpleExpression s = secondRemainder.simpleAdd(addedTerm);
+                    System.out.println("Simplified "+ this.toString() + "to" + s.toString());
+                    return s;
+                    //return secondRemainder.simpleAdd(addedTerm);
+                }
             }
             else if (second.checkMonomial()){
-                return firstRemainder.simpleAdd(addedTerm);
+                SimpleExpression s = firstRemainder.simpleAdd(addedTerm);
+                System.out.println("Simplified "+ this.toString() + "to" + s.toString());
+                return s;
+                //return firstRemainder.simpleAdd(addedTerm);
             }
-            else return firstRemainder.add(secondRemainder).simplify().simpleAdd(addedTerm);
+            else {
+                SimpleExpression s = firstRemainder.add(secondRemainder).simplify().simpleAdd(addedTerm);
+                System.out.println("Simplified "+ this.toString() + "to" + s.toString());
+                return s;
+                //return firstRemainder.add(secondRemainder).simplify().simpleAdd(addedTerm);
+            }
             
         }
         else if (compareVal > 0){
-            addedTerm = secondMon;
-            if (second.checkMonomial()){
-                return first.simpleAdd(addedTerm);
-            }
-            else return secondRemainder.add(first).simplify();
-        }
-        else {
             addedTerm = firstMon;
             if (first.checkMonomial()){
-                return second.simpleAdd(addedTerm);
+                SimpleExpression s = second.simpleAdd(addedTerm);
+                System.out.println("Simplified "+ this.toString() + "to" + s.toString());
+                return s;
+                //return second.simpleAdd(addedTerm);
             }
-            else return firstRemainder.add(second).simplify();
+            else {
+                SimpleExpression s = firstRemainder.add(second).simplify().simpleAdd(addedTerm);
+                System.out.println("Simplified "+ this.toString() + "to" + s.toString());
+                return s;
+                //return firstRemainder.add(second).simplify().simpleAdd(addedTerm);
+            }
+        }
+        else {
+            addedTerm = secondMon;
+            if (second.checkMonomial()){
+                SimpleExpression s = first.simpleAdd(addedTerm);
+                System.out.println("Simplified "+ this.toString() + "to" + s.toString());
+                return s;
+                //return first.simpleAdd(addedTerm);
+            }
+            else {
+                SimpleExpression s =  secondRemainder.add(first).simplify().simpleAdd(addedTerm);
+                System.out.println("Simplified "+ this.toString() + "to" + s.toString());
+                return s;
+                //return secondRemainder.add(first).simplify().simpleAdd(addedTerm);
+            }
         }    
     }
     

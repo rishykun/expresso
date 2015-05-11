@@ -11,9 +11,8 @@ public class Monomial extends SimpleExpression {
     private double coeff;
     protected Map<String, Integer> exps = new TreeMap<>();
     
-    public Monomial(){};
-    
     public Monomial(int n, TreeMap<String, Integer> components){
+        super();
         coeff = n;
         exps = Collections.unmodifiableMap(components);
     }
@@ -64,6 +63,10 @@ public class Monomial extends SimpleExpression {
     }
 
     @Override
+    public Monomial leading(){
+        return this;
+    }
+    @Override
     public Expression differentiate(Variable v) {
         TreeMap<String, Integer> vMap = new TreeMap<>(exps);
         vMap.put(v.toString(), exps.get(v.toString())-1);
@@ -78,7 +81,6 @@ public class Monomial extends SimpleExpression {
     @Override
     public boolean checkMonomial() {
         return true;
-        
     }
     
     @Override
@@ -93,8 +95,12 @@ public class Monomial extends SimpleExpression {
             for (int i =0; i<exps.get(v); i++)
                 out += "*"+v;
         }
+        if (coeff == 1.0){
+            out=out.substring(4, out.length());
+        }
         return out;
     }
+    
     /**
      * Get the Variable to Exponent TreeMap associated with this Monomial
      * 

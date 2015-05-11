@@ -40,22 +40,31 @@ public class Product implements Expression{
 
     @Override
     public SimpleExpression simplify() {
+        System.out.println("Simplifying " + this.toString());
         SimpleExpression first = this.first.simplify();
-        SimpleExpression second= this.second.simplify();
-        Expression summand;
+        SimpleExpression second = this.second.simplify();
+        Expression summand = new Number(0);
         if (second.checkMonomial()){
-            first = second.simplify();
-            second = first.simplify();
+            SimpleExpression secondCopy = second;
+            second = first; 
+            first = secondCopy;
         }
         if (first.checkMonomial()){
-            summand = first.leading();
+            Monomial multiplier = first.leading();
             for (Monomial m:second){
-                summand = summand.add(m);
+                summand = summand.add(m.multiply(multiplier));
             }
-            return summand.simplify();
+            SimpleExpression s = summand.simplify();
+            System.out.println("Simplified " +this.toString() + "to");
+            System.out.println(s);
+            return s;
         }
         else {
-            return (new Sum(first.leading().multiply(second), first.truncate().multiply(second))).simplify();
+            SimpleExpression s = (new Sum(first.leading().multiply(second), first.truncate().multiply(second))).simplify();
+            System.out.println("Simplified " +this.toString() + "to");
+            System.out.println(s);
+            return s;
+            //return (new Sum(first.leading().multiply(second), first.truncate().multiply(second))).simplify();
         }
         
     }
