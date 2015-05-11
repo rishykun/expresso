@@ -117,5 +117,7 @@ public class SimpleExpression implements Expression, Iterable<Monomial>  {
         System.out.println(e2);
         SimpleExpression e3 = new Sum(new Product(new Variable("x"), new Variable("y")), new Product(new Variable("y"), new Variable("z"))).simplify();
         System.out.println(e3);
+        Expression e4 = Expression.parse("x+x");
+        System.out.println(e4.differentiate(new Variable("x")));
     }
 }

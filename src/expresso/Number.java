@@ -32,7 +32,6 @@ public class Number extends Monomial {
      * @param d decimal to represent
      */
     public Number(double d) {
-        //super(d);
         if (Math.round(d) - d == 0) {
             int n = Integer.parseInt(String.valueOf(d).substring(0, String.valueOf(d).indexOf(".")));
             coeff = n;
