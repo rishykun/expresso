@@ -58,7 +58,7 @@ public class Main {
             currentExpression = Expression.parse(input);
             return currentExpression.toString();
         } 
-        catch (RuntimeException e){
+        catch (IllegalArgumentException e){
             return invalidExpressionError;
             
             
