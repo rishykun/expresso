@@ -25,6 +25,7 @@ public class Number extends Monomial {
         isInteger = true;
         exps = Collections.unmodifiableMap(exps);
         isMonomial = true;
+        leading = this;
     }
     
     /**
@@ -44,34 +45,12 @@ public class Number extends Monomial {
         }
         exps = Collections.unmodifiableMap(exps);
         isMonomial = true;
-    }
-    
-    @Override
-    public Expression add(Expression e) {
-        if (this.isInteger){
-            Number copyOfNumber = new Number(Integer.parseInt(this.numString));
-            return new Sum(copyOfNumber, e);
-        }
-        return new Sum(new Number(Double.parseDouble(this.numString)), e);
-    }
-
-    @Override
-    public Expression multiply(Expression e) {
-        if (this.isInteger){
-            Number copyOfNumber = new Number(Integer.parseInt(this.numString));
-            return new Product(copyOfNumber, e);
-        }
-        return new Product(new Number(Double.parseDouble(this.numString)), e);
+        leading = this;
     }
     
     @Override
     public Expression differentiate(Variable v) {
         return new Number(0);
-    }
-
-    @Override
-    public SimpleExpression simplify() {
-        return this;
     }
     
     /**
@@ -83,10 +62,6 @@ public class Number extends Monomial {
         return this.isInteger;
     }
     
-    @Override
-    public String toString() {
-        return this.numString;
-    }
     
     @Override
     public boolean equals(Object other) {
@@ -99,5 +74,10 @@ public class Number extends Monomial {
     public int hashCode() {
         if (this.isInteger){return Integer.parseInt(this.numString);}
         return (int) Double.parseDouble(this.numString);
+    }
+    
+    @Override
+    public String toString() {
+        return this.numString;
     }
 }

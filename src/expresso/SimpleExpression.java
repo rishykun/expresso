@@ -11,7 +11,7 @@ public class SimpleExpression implements Expression, Iterable<Monomial>  {
 
     Monomial leading;
     private SimpleExpression remaining;
-    protected boolean isMonomial = false;
+    boolean isMonomial = false;
     
     //Abstraction function
     //Rep Invariant
@@ -26,7 +26,8 @@ public class SimpleExpression implements Expression, Iterable<Monomial>  {
     
     @Override
     public Expression add(Expression e) {
-        return leading.add(remaining).add(e);
+        //return leading.add(remaining).add(e);
+        return new Sum(this, e);
     }
     
     /**
@@ -41,7 +42,8 @@ public class SimpleExpression implements Expression, Iterable<Monomial>  {
 
     @Override
     public Expression multiply(Expression e) {
-        return leading.add(remaining).multiply(e);
+        //return leading.add(remaining).multiply(e);
+        return new Product(this, e);
     }
 
     @Override
@@ -95,7 +97,7 @@ public class SimpleExpression implements Expression, Iterable<Monomial>  {
      * Gets the remaining terms after the leading monomial term of a
      * simplified expression
      * @return the remaining terms after the leading monomial term of this
-     *          simplified expression
+     *          simplified expression, 0 if there are no remaining terms
      */
     public SimpleExpression truncate(){
         return remaining;
@@ -108,6 +110,16 @@ public class SimpleExpression implements Expression, Iterable<Monomial>  {
             out = out.substring(0, out.length()-2);
         }
         return out;
+    }
+    
+    @Override
+    public boolean equals(Object other){
+        throw new RuntimeException();
+    }
+    
+    @Override
+    public int hashCode(){
+        throw new RuntimeException();
     }
     
     public static void main(String[] args){

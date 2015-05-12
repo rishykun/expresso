@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 /**
  * Series of tests for the Expression datatype
  */
-public class ExpressionTest {
+public class OldTest extends TestSetup {
 
     /*
      * parse
@@ -23,10 +23,15 @@ public class ExpressionTest {
      *  [] no operation between expressions e.g. (x+1)(x+2)
      *  
      * add
-     *  Argument: [x]Number, [x]Product, [x]Sum, [x]Variable 
+     *  []Sum + Anything
+     *  []Product + Anything
+     *  []SimpleExpression + Anything
      *  
      * multiply
-     *  Argument: [x]Number, [x]Product, [x]Sum, [x]Variable
+     *  []Sum * Anything
+     *  []Product*Anything
+     *  []Non-Monomial SimpleExpression * Anything
+     *  []Monomial * non-Monomial
      * 
      * differentiate
      *  Let v be the variable differentiated with respect to, we'll
@@ -35,18 +40,20 @@ public class ExpressionTest {
      *      []Any number
      *  Variable
      *      [] v is the same Variable, [] v is not the same Variable
+     *  Monomial
      *  Sum
      *      []Number+Number
      *      []Number+Expression in v
      *      []Expression in v + Expression in v
-     *      []Expression in v + Expression with some other variable
-     *      Recurse on []Variable, []Sum, Product
+     *      []Expression in v + Expression that does not contain v
+     *      Recurse on []Number, []Variable, []Sum, []Product
      *  Product
      *      []Number*Number
      *      []Number*Expression in v
      *      []Expression in v * Expression in v
      *      []Expression in v * Expression with some other variable
-     *      Recurse on []Variable or Number, []Sum, Product
+     *      Recurse on []Number, []Variable, []Sum, []Product
+     *  SimpleExpression
      *  
      * simplify
      *  Type of expression: []Number, []Product, []Sum, []Variable
@@ -67,41 +74,9 @@ public class ExpressionTest {
      * 
      */
     
-    private static Number one;
-    private static Number zero;
-    private static Number two;
-    private static Variable x;
-    private static Variable y;
-    private static Product xy;
-    private static Sum xplusy;
-    private static Expression xplusytimesxy;
-    private static Expression xytimesxplusy;
-    private static Expression xplusyplusxy;
-    private static Expression xyplusxplusy;
-    private static Expression dxy;
-    private static Expression dxplusy;
-    private static Expression oneplusone ;
-    private static Expression onetimesone;
-    
-    
     @BeforeClass
     public static void setUpBeforeClass(){
-        one = new Number(1);
-        zero = new Number(0);
-        two = new Number(2);
-        x = new Variable("x");
-        y = new Variable("y");
-        xy = new Product(x,y);
-        xplusy = new Sum(x,y);
-        xplusytimesxy = new Product(xplusy, xy); 
-        xytimesxplusy = new Product(xy, xplusy);
-        xplusyplusxy = new Sum(xplusy, xy); 
-        xyplusxplusy = new Sum(xy, xplusy);
-        dxy = xy.differentiate(x);
-        dxplusy = xplusy.differentiate(x);
-        
-        oneplusone = new Sum(one, one);
-        onetimesone = new Product(one, one);
+        TestSetup.setup();
     }
     
     /**
