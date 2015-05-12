@@ -9,8 +9,8 @@ import java.util.TreeMap;
  */
 public class Monomial extends SimpleExpression {
     
-    double coeff;
-    Map<String, Integer> exps = new TreeMap<>();
+    protected double coeff;
+    protected Map<String, Integer> exps = new TreeMap<>();
     
     //Abstraction function
     //Rep Invariant
@@ -97,7 +97,7 @@ public class Monomial extends SimpleExpression {
     
     @Override
     public int hashCode(){
-        throw new RuntimeException();
+        return Double.hashCode(coeff) + exps.hashCode();
     }
     
     /**
