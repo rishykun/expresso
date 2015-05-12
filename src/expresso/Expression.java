@@ -30,6 +30,7 @@ public interface Expression {
      * @throws IllegalArgumentException if the expression is invalid
      */
     public static Expression parse(String input) {
+        try{
         CharStream stream = new ANTLRInputStream(input);
         ExpressionLexer lexer = new ExpressionLexer(stream);
         TokenStream tokens = new CommonTokenStream(lexer);
@@ -40,6 +41,9 @@ public interface Expression {
         OurExpressionListener listener = new OurExpressionListener();
         walker.walk(listener, tree);
         return listener.getExpression();
+        } catch(RuntimeException e){
+            throw new IllegalArgumentException();
+        }
     }
     
     

@@ -22,34 +22,8 @@ public class Variable extends Monomial{
         exps.put(v, 1);
         exps = Collections.unmodifiableMap(exps);
         isMonomial = true;
+        leading = this;
     }
-    
-    @Override
-    public Expression add(Expression e) {
-        Expression copyOfVariable = new Variable(variable); //copy to prevent rep exposure in Sum class?
-        return new Sum(copyOfVariable, e);
-    }
-
-    @Override
-    public Expression multiply(Expression e) {
-        Expression copyOfVariable = new Variable(variable);
-        return new Product(copyOfVariable, e);
-    }
-    
-    /*
-    @Override
-    public Monomial multiply(Monomial m){
-        TreeMap<String, Integer> vMap = new TreeMap<>(m.getMap());
-        if (vMap.keySet().contains(variable)){
-            vMap.put(variable, vMap.get(variable)+1);
-            return new Monomial(m.getCoefficient(), vMap);
-        }
-        else{
-            vMap.put(variable, 1);
-            return new Monomial(m.getCoefficient(), vMap);
-        }
-    }
-    */
     
     @Override
     public Expression differentiate(Variable v) {
@@ -57,10 +31,10 @@ public class Variable extends Monomial{
             return new Number(1);
         } return new Number(0); 
     }
-
+    
     @Override
-    public SimpleExpression simplify() {
-        return this;
+    public String toString() {
+        return variable;
     }
     
     @Override
@@ -69,13 +43,6 @@ public class Variable extends Monomial{
         Variable otherVariable = (Variable) obj;
         return toString().equals(otherVariable.toString());
     }
-    
-    
-    @Override
-    public String toString() {
-        return variable;
-    }
-    
     
     @Override
     public int hashCode(){

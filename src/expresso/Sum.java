@@ -131,52 +131,6 @@ public class Sum implements Expression{
         }    
     }
     
-    /*
-    public SimpleExpression simplify2() {
-        Iterator<Monomial> firstIter = first.simplify().iterator();
-        Iterator<Monomial> secondIter = second.simplify().iterator();   
-        Monomial first = firstIter.next();
-        Monomial second = secondIter.next();
-        int compareVal;
-        Comparator<Monomial> comparator = new MonomialComparator();
-        SimpleExpression simplified = new Number(0);
-        while (true) {
-            compareVal = comparator.compare(first, second);
-                if (first.getMap().equals(second.getMap())){
-                    simplified = simplified.simpleAdd(first.addCoeff(new Number(second.getCoefficient())));
-                    if (!firstIter.hasNext() || !secondIter.hasNext()){
-                        break;
-                    }
-                    first = firstIter.next();
-                    second = secondIter.next();
-                }
-                else if (compareVal == 1){
-                    simplified = simplified.simpleAdd(second);
-                    if (!secondIter.hasNext()){
-                        simplified = simplified.simpleAdd(first);
-                        break;
-                    }
-                    second = secondIter.next();                    
-                }
-                else if (compareVal == -1){
-                    simplified = simplified.simpleAdd(first);
-                    if (!firstIter.hasNext()){
-                        simplified = simplified.simpleAdd(second);
-                        break;
-                    }
-                    first = firstIter.next();
-                }
-
-            }
-        while (firstIter.hasNext()){
-            simplified = simplified.simpleAdd(firstIter.next());
-        }
-        while (secondIter.hasNext()){
-            simplified = simplified.simpleAdd(secondIter.next());
-        }
-        return simplified;
-    }*/
-    
     @Override
     public String toString() {
         return "(" + first.toString() + ") + (" + second.toString() + ')';

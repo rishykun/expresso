@@ -11,7 +11,7 @@ public class SimpleExpression implements Expression, Iterable<Monomial>  {
 
     Monomial leading;
     private SimpleExpression remaining;
-    protected boolean isMonomial = false;
+    boolean isMonomial = false;
     
     //Abstraction function
     //Rep Invariant
@@ -26,7 +26,8 @@ public class SimpleExpression implements Expression, Iterable<Monomial>  {
     
     @Override
     public Expression add(Expression e) {
-        return leading.add(remaining).add(e);
+        //return leading.add(remaining).add(e);
+        return new Sum(this, e);
     }
     
     /**
@@ -41,7 +42,8 @@ public class SimpleExpression implements Expression, Iterable<Monomial>  {
 
     @Override
     public Expression multiply(Expression e) {
-        return leading.add(remaining).multiply(e);
+        //return leading.add(remaining).multiply(e);
+        return new Product(this, e);
     }
 
     @Override
@@ -95,7 +97,7 @@ public class SimpleExpression implements Expression, Iterable<Monomial>  {
      * Gets the remaining terms after the leading monomial term of a
      * simplified expression
      * @return the remaining terms after the leading monomial term of this
-     *          simplified expression
+     *          simplified expression, 0 if there are no remaining terms
      */
     public SimpleExpression truncate(){
         return remaining;
@@ -110,12 +112,24 @@ public class SimpleExpression implements Expression, Iterable<Monomial>  {
         return out;
     }
     
+    @Override
+    public boolean equals(Object other){
+        throw new RuntimeException();
+    }
+    
+    @Override
+    public int hashCode(){
+        throw new RuntimeException();
+    }
+    
     public static void main(String[] args){
-        SimpleExpression e1 = new Sum(new Variable("x").multiply(new Variable("y")), new Variable("y").multiply(new Variable("x")).multiply(new Variable("y"))).simplify();
-        SimpleExpression e2 = (new Product(new Sum(new Variable("x"), new Number(1)), new Sum(new Variable("x"), new Number(2)))).simplify();
+        SimpleExpression e1 = Expression.parse("xy+y*x*x").simplify();
+        SimpleExpression e2 = Expression.parse("(x+1)*(x+2)").simplify();
         System.out.println(e1);
         System.out.println(e2);
-        SimpleExpression e3 = new Sum(new Product(new Variable("x"), new Variable("y")), new Product(new Variable("y"), new Variable("z"))).simplify();
+        SimpleExpression e3 = Expression.parse("xy+yz").simplify();
         System.out.println(e3);
+        Expression e4 = Expression.parse("x+x");
+        System.out.println(e4.differentiate(new Variable("x")));
     }
 }

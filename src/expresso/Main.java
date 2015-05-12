@@ -58,8 +58,9 @@ public class Main {
             currentExpression = Expression.parse(input);
             return currentExpression.toString();
         } 
-        catch (RuntimeException e){
-            return invalidExpressionError;
+        catch (IllegalArgumentException e){
+            throw new IllegalArgumentException();
+            //return invalidExpressionError;
             
             
         }
@@ -78,10 +79,12 @@ public class Main {
     private static String handleCommand(String substring) {
         if (substring.equals("simplify")){
             Expression simplifiedExpression = currentExpression.simplify();
+            currentExpression = simplifiedExpression;
             return simplifiedExpression.toString();
         } else if (substring.startsWith("d/d")){
-            String variable = substring.substring(0, 3);
-            Expression diffExpression = new Variable(variable);
+            String variable = substring.substring(3, substring.length());
+            Expression diffExpression = currentExpression.differentiate(new Variable(variable));
+            currentExpression = diffExpression;
             return diffExpression.toString();
         } else {
             return invalidCommandError;
