@@ -7,7 +7,7 @@ import org.antlr.v4.runtime.TokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
-import expresso.parser.Expression.ExpressionBaseListener;
+import expresso.parser.Expression.OurExpressionListener;
 import expresso.parser.Expression.ExpressionLexer;
 import expresso.parser.Expression.ExpressionParser;
 
@@ -37,7 +37,7 @@ public interface Expression {
         parser.reportErrorsAsExceptions();
         ParseTree tree = parser.line();
         ParseTreeWalker walker = new ParseTreeWalker();
-        ExpressionBaseListener listener = new ExpressionBaseListener();
+        OurExpressionListener listener = new OurExpressionListener();
         walker.walk(listener, tree);
         return listener.getExpression();
     }

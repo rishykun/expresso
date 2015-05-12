@@ -55,7 +55,7 @@ public class Main {
      */
     private static String handleExpression(String input) {
         try{
-            Expression currentExpression = Expression.parse(input);
+            currentExpression = Expression.parse(input);
             return currentExpression.toString();
         } 
         catch (RuntimeException e){

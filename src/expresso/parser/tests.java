@@ -17,7 +17,7 @@ import expresso.parser.Expression.ExpressionLexer;
 import expresso.parser.Expression.ExpressionListener;
 import expresso.parser.Expression.ExpressionParser;
 import expresso.Expression;
-import expresso.parser.Expression.ExpressionBaseListener;
+import expresso.parser.Expression.OurExpressionListener;
 
 public class tests {
     
@@ -33,14 +33,14 @@ public class tests {
     
     //fiddling
     public static void main(String[] args){
-        CharStream stream = new ANTLRInputStream("1       +    x + 2.2 + x*y +xy+0.1");
+        CharStream stream = new ANTLRInputStream("x * x + x * x");
         ExpressionLexer lexer = new ExpressionLexer(stream);
         TokenStream tokens = new CommonTokenStream(lexer);
         ExpressionParser parser = new ExpressionParser(tokens);
         ParseTree tree = parser.line();
         ((RuleContext)tree).inspect(parser);
         ParseTreeWalker walker = new ParseTreeWalker();
-        ExpressionBaseListener listener = new ExpressionBaseListener();
+        OurExpressionListener listener = new OurExpressionListener();
         walker.walk(listener, tree);
         Expression result = listener.getExpression();
         System.out.println(result.toString());
