@@ -70,6 +70,9 @@ public class Monomial extends SimpleExpression {
      * @return the product of this monomial with m
      */
     public Monomial multiply(Monomial m){
+        if (coeff == 0 || m.coeff == 0) {
+            return new Number(0);
+        }
         TreeMap<String, Integer> vMap = new TreeMap<>(getMap());
         m.getMap().forEach((key, value) -> vMap.merge(key, value, (a,b) -> a+b));
         return new Monomial(coeff*m.getCoefficient(), vMap);
