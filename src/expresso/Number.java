@@ -40,7 +40,7 @@ public class Number extends Monomial {
             isInteger = true;
         } else {
             coeff = d;
-            this.numString = Double.toString(d);
+            this.numString = Double.toString(d).replaceAll("0*$", "");
             isInteger = false;
         }
         exps = Collections.unmodifiableMap(exps);
@@ -48,6 +48,13 @@ public class Number extends Monomial {
         leading = this;
     }
     
+    /**
+     * Gets the derivative of a number with respect to a
+     * specified variable
+     * 
+     * @param v variable to differentiate with respect to
+     * @return derivative of this number
+     */
     @Override
     public Expression differentiate(Variable v) {
         return new Number(0);
@@ -62,21 +69,10 @@ public class Number extends Monomial {
         return this.isInteger;
     }
     
-    /*
-    @Override
-    public boolean equals(Object other) {
-        if (!(other instanceof Number)){return false;}
-        Number otherNumber = (Number) other;
-        return Double.parseDouble(this.numString) == Double.parseDouble(otherNumber.toString());
-    }
-    */
-    
-    @Override
-    public int hashCode() {
-        if (this.isInteger){return Integer.parseInt(this.numString);}
-        return (int) Double.parseDouble(this.numString);
-    }
-    
+    /**
+     * Returns the string value of the number represented with no unnecessary
+     * trailing zeros.  Integers are represented without the decimal point.
+     */
     @Override
     public String toString() {
         return this.numString;
