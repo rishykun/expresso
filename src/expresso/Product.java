@@ -83,8 +83,9 @@ public class Product implements Expression{
     @Override
     public boolean equals(Object other) {
         if (!(other instanceof Product)){return false;}
-        Product otherExpression = (Product) other;
-        return this.toString().equals(otherExpression.toString());
+        Product otherProduct = (Product) other;
+        return first.equals(otherProduct.first) && second.equals(otherProduct.second);
+        //return this.toString().equals(otherExpression.toString());
     }
     
     @Override

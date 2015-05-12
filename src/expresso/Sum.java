@@ -130,7 +130,7 @@ public class Sum implements Expression{
             }
         }    
     }
-    
+
     @Override
     public String toString() {
         return "(" + first.toString() + ") + (" + second.toString() + ')';
@@ -139,8 +139,9 @@ public class Sum implements Expression{
     @Override
     public boolean equals(Object other) {
         if (!(other instanceof Sum)){return false;}
-        Sum otherExpression = (Sum) other;
-        return this.toString().equals(otherExpression.toString());
+        Sum otherSum = (Sum) other;
+        return (first.equals(otherSum.first)) && (second.equals(otherSum.second));
+        //return this.toString().equals(otherExpression.toString());
     }
     
     @Override

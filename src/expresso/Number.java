@@ -62,13 +62,14 @@ public class Number extends Monomial {
         return this.isInteger;
     }
     
-    
+    /*
     @Override
     public boolean equals(Object other) {
         if (!(other instanceof Number)){return false;}
         Number otherNumber = (Number) other;
         return Double.parseDouble(this.numString) == Double.parseDouble(otherNumber.toString());
     }
+    */
     
     @Override
     public int hashCode() {

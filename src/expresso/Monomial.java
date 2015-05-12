@@ -86,8 +86,10 @@ public class Monomial extends SimpleExpression {
     }
     
     @Override
-    public boolean equals(Object other){
-        throw new RuntimeException();
+    public boolean equals(Object other) {
+        if (!(other instanceof Monomial)){return false;}
+        Monomial otherMonomial = (Monomial) other;
+        return (getCoefficient() == otherMonomial.getCoefficient()) && (getMap().equals(otherMonomial.getMap()));
     }
     
     @Override
@@ -113,7 +115,7 @@ public class Monomial extends SimpleExpression {
             for (int i =0; i<exps.get(v); i++)
                 out += "*"+v;
         }
-        if (coeff == 1.0){
+        if (coeff == 1.0 && !exps.isEmpty()){
             out=out.substring(4, out.length());
         }
         return out;

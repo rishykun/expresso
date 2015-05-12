@@ -114,7 +114,9 @@ public class SimpleExpression implements Expression, Iterable<Monomial>  {
     
     @Override
     public boolean equals(Object other){
-        throw new RuntimeException();
+        if (!(other instanceof SimpleExpression)){return false;}
+        SimpleExpression otherSimple = (SimpleExpression) other;
+        return leading.equals(otherSimple.leading) && remaining.equals(otherSimple.remaining);
     }
     
     @Override
