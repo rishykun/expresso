@@ -58,8 +58,9 @@ public class Main {
             currentExpression = Expression.parse(input);
             return currentExpression.toString();
         } 
-        catch (RuntimeException e){
-            return invalidExpressionError;
+        catch (IllegalArgumentException e){
+            throw new IllegalArgumentException();
+            //return invalidExpressionError;
             
             
         }
