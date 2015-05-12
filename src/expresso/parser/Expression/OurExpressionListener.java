@@ -49,7 +49,8 @@ public class OurExpressionListener extends ExpressionBaseListener{
                 && ctx.tail().getChildCount() == 3
                 && ctx.tail().getChild(0).getText().equals("+")
                 && !operations.isEmpty()
-                && operations.peek().equals("*")){
+                && operations.peek().equals("*")
+                && ctx.getParent().getChildCount() != 4){
             Expression toBeMultiplied = stack.pop();
             stack.push(new Number(1));
             String value = ctx.loner().getChild(0).getText();

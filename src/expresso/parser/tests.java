@@ -33,7 +33,7 @@ public class tests {
     
     //fiddling
     public static void main(String[] args){
-        CharStream stream = new ANTLRInputStream("x * x + x * x");
+        CharStream stream = new ANTLRInputStream("x * y * (x + y)");
         ExpressionLexer lexer = new ExpressionLexer(stream);
         TokenStream tokens = new CommonTokenStream(lexer);
         ExpressionParser parser = new ExpressionParser(tokens);
