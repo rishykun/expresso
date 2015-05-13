@@ -79,7 +79,7 @@ public interface Expression {
      *              query (ending the program), so inputs like "6 +" are also considered invalid.
      */
     public static Expression parse(String input) throws IllegalArgumentException {
-        try{
+        //try{
             CharStream stream = new ANTLRInputStream(input);
             ExpressionLexer lexer = new ExpressionLexer(stream);
             TokenStream tokens = new CommonTokenStream(lexer);
@@ -89,10 +89,12 @@ public interface Expression {
             ParseTreeWalker walker = new ParseTreeWalker();
             OurExpressionListener listener = new OurExpressionListener();
             walker.walk(listener, tree);
-            return listener.getExpression();
-        } catch(RuntimeException e){
             throw new IllegalArgumentException();
-        }
+            //return listener.getExpression();
+        //} catch(RuntimeException e){
+          //  System.out.println("caught");
+          //  throw new IllegalArgumentException();
+        //}
     }
     
     
