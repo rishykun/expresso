@@ -17,6 +17,9 @@ public class TestSetup {
     protected static Product nestedproductandsumtwoxy;
     protected static Product xy;
     protected static Sum xplusy;
+    protected static Expression xplusone;
+    protected static Monomial xtimesx;
+    protected static SimpleExpression xtimesxplusx;
     
     //slightly more complicated expressions
     protected static Expression xplusytimesxy;
@@ -32,19 +35,20 @@ public class TestSetup {
         one = new Number(1);
         zero = new Number(0);
         two = new Number(02.0);
-        x = new Variable("x");
-        y = new Variable("y");
         twox = new Product(two, x);
         twoplusxtimesxplusy = new Product(new Sum(two, x), new Sum(x, y));
         twotimesxtimesxtimesy = new Product(new Product(two, x), new Product(x, y));
         nestedproductandsumtwoxy = new Product(new Sum(two, new Product(x, y)), new Product(new Sum(two, y), x));
         xy = new Product(x,y);
         xplusy = new Sum(x,y);
+        xplusone = x.add(one);
+        xtimesx = x.multiply(x);
+        xtimesxplusx = new SimpleExpression(xtimesx, x);
         
-        xplusytimesxy = Expression.parse("(x+y)*x*y"); 
-        xytimesxplusy = Expression.parse("x*y*(x+y)");
-        xplusyplusxy = Expression.parse("x+y+x*y");
-        xyplusxplusy = Expression.parse("x*y+x+y");
+        xplusytimesxy = Expression.parse("(x+y)*(x*y)"); 
+        xytimesxplusy = Expression.parse("(x*y)*(x+y)");
+        xplusyplusxy = Expression.parse("(x+y)+(x*y)");
+        xyplusxplusy = Expression.parse("(x*y)+(x+y)");
         dxy = xy.differentiate(x);
         dxplusy = xplusy.differentiate(x);
         
