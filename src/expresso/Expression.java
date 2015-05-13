@@ -92,7 +92,6 @@ public interface Expression {
             walker.walk(listener, tree);
             return listener.getExpression();
         } catch(RuntimeException e){
-            System.out.println("caught");
             throw new IllegalArgumentException();
         }
     }
