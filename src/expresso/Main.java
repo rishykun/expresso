@@ -53,7 +53,7 @@ public class Main {
      * @return an equivalent representation of the expression, or an error 
      * if the expression is invalid
      */
-    private static String handleExpression(String input) {
+    private static String handleExpression(String input) throws IllegalArgumentException{
 
         currentExpression = Expression.parse(input);
         return currentExpression.toString();
@@ -68,7 +68,7 @@ public class Main {
      * @return the result of applying the command, or an error if the command is incomplete or
      * not recognized
      */
-    private static String handleCommand(String substring) {
+    private static String handleCommand(String substring) throws IllegalArgumentException {
         if (substring.equals("simplify")){
             Expression simplifiedExpression = currentExpression.simplify();
             currentExpression = simplifiedExpression;
@@ -79,7 +79,7 @@ public class Main {
             currentExpression = diffExpression;
             return diffExpression.toString();
         } else {
-            return invalidCommandError;
+            throw new IllegalArgumentException(invalidCommandError);
         }
 
     }
