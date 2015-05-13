@@ -37,12 +37,14 @@ public class Variable extends Monomial{
         return variable;
     }
     
+    /*
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof Variable)){return false;}
         Variable otherVariable = (Variable) obj;
         return toString().equals(otherVariable.toString());
     }
+    */
     
     @Override
     public int hashCode(){

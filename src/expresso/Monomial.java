@@ -9,8 +9,8 @@ import java.util.TreeMap;
  */
 public class Monomial extends SimpleExpression {
     
-    double coeff;
-    Map<String, Integer> exps = new TreeMap<>();
+    protected double coeff;
+    protected Map<String, Integer> exps = new TreeMap<>();
     
     //Abstraction function
     //Rep Invariant
@@ -70,6 +70,9 @@ public class Monomial extends SimpleExpression {
      * @return the product of this monomial with m
      */
     public Monomial multiply(Monomial m){
+        if (coeff == 0 || m.coeff == 0) {
+            return new Number(0);
+        }
         TreeMap<String, Integer> vMap = new TreeMap<>(getMap());
         m.getMap().forEach((key, value) -> vMap.merge(key, value, (a,b) -> a+b));
         return new Monomial(coeff*m.getCoefficient(), vMap);
@@ -86,13 +89,15 @@ public class Monomial extends SimpleExpression {
     }
     
     @Override
-    public boolean equals(Object other){
-        throw new RuntimeException();
+    public boolean equals(Object other) {
+        if (!(other instanceof Monomial)){return false;}
+        Monomial otherMonomial = (Monomial) other;
+        return (getCoefficient() == otherMonomial.getCoefficient()) && (getMap().equals(otherMonomial.getMap()));
     }
     
     @Override
     public int hashCode(){
-        throw new RuntimeException();
+        return Double.hashCode(coeff) + exps.hashCode();
     }
     
     /**
@@ -113,7 +118,7 @@ public class Monomial extends SimpleExpression {
             for (int i =0; i<exps.get(v); i++)
                 out += "*"+v;
         }
-        if (coeff == 1.0){
+        if (coeff == 1.0 && !exps.isEmpty()){
             out=out.substring(4, out.length());
         }
         return out;

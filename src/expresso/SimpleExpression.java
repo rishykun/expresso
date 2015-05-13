@@ -9,9 +9,9 @@ import java.util.List;
  */
 public class SimpleExpression implements Expression, Iterable<Monomial>  {
 
-    Monomial leading;
+    protected Monomial leading;
     private SimpleExpression remaining;
-    boolean isMonomial = false;
+    protected boolean isMonomial = false;
     
     //Abstraction function
     //Rep Invariant
@@ -114,7 +114,9 @@ public class SimpleExpression implements Expression, Iterable<Monomial>  {
     
     @Override
     public boolean equals(Object other){
-        throw new RuntimeException();
+        if (!(other instanceof SimpleExpression)){return false;}
+        SimpleExpression otherSimple = (SimpleExpression) other;
+        return leading.equals(otherSimple.leading) && remaining.equals(otherSimple.remaining);
     }
     
     @Override
