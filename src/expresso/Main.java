@@ -72,16 +72,25 @@ public class Main {
      * not recognized
      */
     private static String handleCommand(String substring) {
+        try{
         if (substring.equals("simplify")){
+            /*
             Expression simplifiedExpression = currentExpression.simplify();
             currentExpression = simplifiedExpression;
             return simplifiedExpression.toString();
+            */
+            return Expressions.simplify(currentExpression.toString());
         } else if (substring.startsWith("d/d")){
             String variable = substring.substring(3, substring.length());
+            /*
             Expression diffExpression = currentExpression.differentiate(new Variable(variable));
             currentExpression = diffExpression;
             return diffExpression.toString();
-        } else {
+            */
+            return Expressions.differentiate(currentExpression.toString(), variable);
+        } 
+        else throw new IllegalArgumentException();
+        } catch (IllegalArgumentException e){
             return invalidCommandError;
         }
 
