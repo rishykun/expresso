@@ -74,20 +74,16 @@ public class Main {
     private static String handleCommand(String substring) {
         try{
         if (substring.equals("simplify")){
-            /*
+            String simpExpr = Expressions.simplify(currentExpression.toString());
             Expression simplifiedExpression = currentExpression.simplify();
             currentExpression = simplifiedExpression;
-            return simplifiedExpression.toString();
-            */
-            return Expressions.simplify(currentExpression.toString());
+            return simpExpr;
         } else if (substring.startsWith("d/d")){
             String variable = substring.substring(3, substring.length());
-            /*
+            String diffExpr = Expressions.differentiate(currentExpression.toString(), variable);
             Expression diffExpression = currentExpression.differentiate(new Variable(variable));
             currentExpression = diffExpression;
-            return diffExpression.toString();
-            */
-            return Expressions.differentiate(currentExpression.toString(), variable);
+            return diffExpr;
         } 
         else throw new IllegalArgumentException();
         } catch (IllegalArgumentException e){
