@@ -157,7 +157,6 @@ public class Sum implements Expression{
         if (!(other instanceof Sum)){return false;}
         Sum otherSum = (Sum) other;
         return (first.equals(otherSum.first)) && (second.equals(otherSum.second));
-        //return this.toString().equals(otherExpression.toString());
     }
     
     @Override

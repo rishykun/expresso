@@ -16,7 +16,6 @@ public class Variable extends Monomial{
      * @param v variable to represent
      */
     public Variable(String v){
-        //super(v);
         variable = v; 
         coeff = 1;
         exps.put(v, 1);
@@ -27,7 +26,7 @@ public class Variable extends Monomial{
     
     @Override
     public Expression differentiate(Variable v) {
-        if (v.toString().equals(variable)) {
+        if (equals(v)) {
             return new Number(1);
         } return new Number(0); 
     }
@@ -36,15 +35,6 @@ public class Variable extends Monomial{
     public String toString() {
         return variable;
     }
-    
-    /*
-    @Override
-    public boolean equals(Object obj) {
-        if (!(obj instanceof Variable)){return false;}
-        Variable otherVariable = (Variable) obj;
-        return toString().equals(otherVariable.toString());
-    }
-    */
     
     @Override
     public int hashCode(){
