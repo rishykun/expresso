@@ -27,7 +27,7 @@ public class TestSetup {
         y = new Variable("y");
         one = new Number(1);
         zero = new Number(0);
-        two = new Number(2.0);
+        two = new Number(02.0);
         x = new Variable("x");
         y = new Variable("y");
         xy = new Product(x,y);
@@ -42,6 +42,6 @@ public class TestSetup {
         
         oneplusone = Expression.parse("1+1");
         onetimesone = Expression.parse("1*1");
-        onepointone = new Number(1.100);
+        onepointone = new Number(001.100);
     }
 }

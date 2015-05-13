@@ -6,18 +6,20 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class NumberTest extends TestSetup {
-    
+
     /**
      * differentiate
      *  [x]0, [x]1, [x]Decimal
      * 
      * isInteger
-     *  [x]Integer, [x]Decimal
+     *  Integer [x]with, [x]without decimal
+     *  [x]Non-integer decimal
      * 
      * toString
      *  [x]0, [x]1, [x]Other integer
      *  [x]0.0, [x]1.0, [x]Other decimal
      *  Unnecessary trailing zeros in initialization: [x]0, [x]1, [x]>1
+     *  Unnecessary preceding zeros in initialization: [x]0, [x]1, [x]>1
      */
     @BeforeClass
     public static void setUpBeforeClass(){
@@ -25,7 +27,7 @@ public class NumberTest extends TestSetup {
     }
     
     /**
-     * Differentiates 0, 1, and 1.100
+     * Differentiates 0, 1, and 001.100
      */
     @Test
     public void derivativeTest() {
@@ -35,16 +37,17 @@ public class NumberTest extends TestSetup {
     }
     
     /**
-     * Tests isInteger on 1 and 1.100
+     * Tests isInteger on 1, 2.0, and 001.100
      */
     @Test
     public void isIntegerTest() {
         assertTrue(one.isInteger());
+        assertTrue(two.isInteger());
         assertFalse(onepointone.isInteger());
     }
     
     /**
-     * Tests toString on 0, 1, 2.0, 0.0, 1.0, 1.100
+     * Tests toString on 0, 1, 02.0, 0.0, 1.0, 001.100
      */
     @Test
     public void toStringTest() {
