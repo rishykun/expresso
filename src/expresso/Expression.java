@@ -91,7 +91,7 @@ public interface Expression {
             walker.walk(listener, tree);
             return listener.getExpression();
         } catch(RuntimeException e){
-            throw new IllegalArgumentException("ParseError: Please enter a valid expression");
+            throw new IllegalArgumentException();
         }
     }
     

@@ -12,7 +12,7 @@ public class Expressions {
      * @return expression's derivative with respect to variable; will be a valid expression
      * @throws IllegalArgumentException if the expression or variable is invalid
      */
-    public static String differentiate(String expression, String variable) {
+    public static String differentiate(String expression, String variable) throws IllegalArgumentException{
         Expression parsedInput = Expression.parse(expression);
         Expression diffInput = parsedInput.differentiate(new Variable(variable));
         return diffInput.toString();
@@ -28,7 +28,7 @@ public class Expressions {
      *         left-to-right, the largest exponent in each term is non-increasing
      * @throws IllegalArgumentException if the expression is invalid
      */
-    public static String simplify(String expression) {
+    public static String simplify(String expression) throws IllegalArgumentException {
         Expression parsedInput = Expression.parse(expression);
         Expression simplified = parsedInput.simplify();
         return simplified.toString();
