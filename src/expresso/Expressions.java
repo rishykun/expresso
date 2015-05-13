@@ -13,15 +13,12 @@ public class Expressions {
      * @throws IllegalArgumentException if the expression or variable is invalid
      */
     public static String differentiate(String expression, String variable) throws IllegalArgumentException{
-        throw new IllegalArgumentException();
-        /*
         if (!variable.matches("[A-Za-z]+")){
             throw new IllegalArgumentException();
         }
         Expression parsedInput = Expression.parse(expression);
         Expression diffInput = parsedInput.differentiate(new Variable(variable));
         return diffInput.toString();
-        */
     }
     
     /**
