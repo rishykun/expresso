@@ -121,7 +121,7 @@ public class SimpleExpression implements Expression, Iterable<Monomial>  {
     
     @Override
     public int hashCode(){
-        throw new RuntimeException();
+        return leading.hashCode() + remaining.hashCode();
     }
     
     public static void main(String[] args){
