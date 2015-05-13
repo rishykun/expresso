@@ -38,11 +38,7 @@ public class OurExpressionListener extends ExpressionBaseListener{
      * <p>Checks to see that the stack is left with a single Expression
      * and that no operations are left when exiting a line.</p>
      */
-    @Override public void exitLine(ExpressionParser.LineContext ctx) {
-        //assert stack.size() == 1;
-        //assert operations.size() == 0;
-        //assert nestLevel.size() == 0;
-    }
+    @Override public void exitLine(ExpressionParser.LineContext ctx) { }
     /**
      * {@inheritDoc}
      *
