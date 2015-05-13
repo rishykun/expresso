@@ -6,8 +6,11 @@ public class Sum implements Expression{
     private final Expression second;
     
     //Abstraction function
+    // Represents the sum first + second
     //Rep Invariant
+    // True
     //Rep Exposure
+    // first and second are private, final, and immutable
     
     /**
      * Constructs the sum of two specified expressions
@@ -17,6 +20,7 @@ public class Sum implements Expression{
     public Sum(Expression e1, Expression e2){
         first = e1;
         second = e2;
+        checkRep();
     }
     
     @Override
@@ -147,6 +151,10 @@ public class Sum implements Expression{
     @Override
     public int hashCode(){
         return first.hashCode() + second.hashCode();
+    }
+    
+    private void checkRep(){
+        assert true;
     }
 
 }
