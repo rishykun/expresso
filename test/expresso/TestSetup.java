@@ -14,6 +14,7 @@ public class TestSetup {
     protected static Variable y;
     protected static Variable z;
     protected static Variable multiLetter;
+    protected static Variable multiCase;
     protected static Variable alongname;
     protected static Product twox;
     protected static Product twoplusxtimesxplusy;
@@ -43,6 +44,7 @@ public class TestSetup {
         y = new Variable("y");
         z = new Variable("z");
         multiLetter = new Variable("multi");
+        multiCase = new Variable("HeLlO");
         
         one = new Number(1);
         zero = new Number(0);
