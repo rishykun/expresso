@@ -8,12 +8,12 @@ import java.io.InputStreamReader;
  * Console interface to the expression system.
  */
 public class Main {
-    
+
     private static final String COMMAND_PREFIX = "!";
     private static Expression currentExpression;
     private static final String invalidExpressionError = "ParseError: Please enter a valid expression!";
     private static final String invalidCommandError = "ParseError: Please enter a valid command!";
-    
+
     /**
      * Read expression and command inputs from the console and output results.
      * An empty input terminates the program.
@@ -22,15 +22,15 @@ public class Main {
      */
     public static void main(String[] args) throws IOException {
         final BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-        
+
         while (true) {
             System.out.print("> ");
             final String input = in.readLine();
-            
+
             if (input.isEmpty()) {
                 return;
             }
-            
+
             try {
                 final String output;
                 if (input.startsWith(COMMAND_PREFIX)) {
@@ -44,7 +44,7 @@ public class Main {
             }
         }
     }
-    
+
     /**
      * Outputs the expression typed in by the user, or an
      * error message if the expression is invalid
@@ -54,20 +54,12 @@ public class Main {
      * if the expression is invalid
      */
     private static String handleExpression(String input) {
-        //try{
-            currentExpression = Expression.parse(input);
-            return currentExpression.toString();
-        //} 
-        //catch (IllegalArgumentException e){
-          //  throw new IllegalArgumentException();
-            //return invalidExpressionError;
-            
-            
-        //}
-       
-        
+
+        currentExpression = Expression.parse(input);
+        return currentExpression.toString();
+
     }
-    
+
     /**
      * Outputs the result of a user command, or an
      * error message if the command is not recognized
@@ -89,7 +81,7 @@ public class Main {
         } else {
             return invalidCommandError;
         }
-        
+
     }
-    
+
 }

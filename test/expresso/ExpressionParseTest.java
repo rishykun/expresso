@@ -74,7 +74,7 @@ public class ExpressionParseTest extends TestSetup {
     public void multiplyOperation() {
         assertEquals(twox, Expression.parse("2*x"));
         assertEquals(xy, Expression.parse("x*y"));
-        assertEquals(xtimesx, Expression.parse("x*x"));
+        assertEquals(xtimesx, Expression.parse("x*x").simplify());
     }
     
     @Test
@@ -89,8 +89,8 @@ public class ExpressionParseTest extends TestSetup {
     public void multiEnclosingParenthesis() {
         assertEquals(xplusypluszplusone, Expression.parse("(((x+y+z+1)))"));
         assertEquals(xy, Expression.parse("(((x))) * (((y)))"));
-        assertEquals(xtimesx, Expression.parse("((((x)))*(((x))))"));
-        assertEquals(twotimesxtimesxtimesy, Expression.parse("(2*((x))*(x)*(y))"));
+        assertEquals(xtimesx, Expression.parse("((((x)))*(((x))))").simplify());
+        assertEquals(twotimesxtimesxtimesy, Expression.parse("(2*x)*(x*y)"));
     }
     
     @Test
@@ -105,7 +105,7 @@ public class ExpressionParseTest extends TestSetup {
         assertEquals(one, Expression.parse("    1   "));
         assertEquals(twox, Expression.parse("2   *   x"));
         assertEquals(xplusy, Expression.parse("x    +     y  "));
-        assertEquals(twotimesxtimesxtimesy, Expression.parse("(2 * ( ( x ) ) *  ( x )*   ( y ) ) "));
+        assertEquals(twotimesxtimesxtimesy, Expression.parse("(2 * ( ( x ) )) *  (( x )*   ( y ))  "));
         assertEquals(nestedproductandsumtwoxy, Expression.parse("( 2 + ( x * y ) ) * ( ( 2 + y ) *  x)"));
         
     }
@@ -113,7 +113,7 @@ public class ExpressionParseTest extends TestSetup {
     @Test
     public void failNoSpaceBetweenVariables(){
         try{
-            Expression.parse("xy");
+            Expression.parse("x y");
             assertFalse(true);
         } catch(IllegalArgumentException e){
             assertTrue(true);
@@ -121,7 +121,7 @@ public class ExpressionParseTest extends TestSetup {
         
         
         try{
-            Expression.parse("xx");
+            Expression.parse("x x");
             assertFalse(true);
         } catch(IllegalArgumentException e){
             assertTrue(true);

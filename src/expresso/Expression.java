@@ -78,7 +78,7 @@ public interface Expression {
      *              do not include empty Strings even though an empty input is a valid
      *              query (ending the program), so inputs like "6 +" are also considered invalid.
      */
-    public static Expression parse(String input) {
+    public static Expression parse(String input) throws IllegalArgumentException {
         try{
             CharStream stream = new ANTLRInputStream(input);
             ExpressionLexer lexer = new ExpressionLexer(stream);
@@ -91,6 +91,7 @@ public interface Expression {
             walker.walk(listener, tree);
             return listener.getExpression();
         } catch(RuntimeException e){
+            System.out.println("caught");
             throw new IllegalArgumentException();
         }
     }

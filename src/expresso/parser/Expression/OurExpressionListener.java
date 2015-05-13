@@ -38,9 +38,9 @@ public class OurExpressionListener extends ExpressionBaseListener{
      * and that no operations are left when exiting a line.</p>
      */
     @Override public void exitLine(ExpressionParser.LineContext ctx) {
-        assert stack.size() == 1;
-        assert operations.size() == 0;
-        assert nestLevel.size() == 0;
+        //assert stack.size() == 1;
+        //assert operations.size() == 0;
+        //assert nestLevel.size() == 0;
     }
     /**
      * {@inheritDoc}
