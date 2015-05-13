@@ -26,21 +26,37 @@ public interface Expression {
     /**
      * Parse an expression.
      * @param input expression to parse
-     * @return expression AST for the input
+     * @return expression AST for the input that is mathematically equivalent to the desired Expression,
+     *         whose toString() method returns a String that includes all numbers,
+     *         variables, and operations of the input, appearing  in the same order.
      * @throws IllegalArgumentException if the expression is invalid
+     *         Invalid inputs are defined as having at least one of the following characteristics:
+     *           1) Unbalanced parentheses
+     *           2) Letters and numbers that appear immediately after one another with no separation
+     *              by operations (x9u, 3.00f2, 5 y, 3x, etc.)
+     *           3) Numbers with more than one decimal, letters that are in the immediate vicinity of a
+     *              decimal (i.e. would appear right next to one if spaces are removed), or variable names
+     *              that include space characters
+     *           4) Invalid operations (-, /, ^, or any character that is not a letter, number, decimal,
+     *              +, *, space, or parenthesis.)
+     *           5) One or more operative symbols that do not have a left and right subexpression
+     *              to perform their respective operations on such that both subexpressions would be
+     *              valid stand-alone inputs (t + (), a + , etc.) In this case, valid subexpressions
+     *              do not include empty Strings even though an empty input is a valid
+     *              query (ending the program), so inputs like "6 +" are also considered invalid.
      */
     public static Expression parse(String input) {
         try{
-        CharStream stream = new ANTLRInputStream(input);
-        ExpressionLexer lexer = new ExpressionLexer(stream);
-        TokenStream tokens = new CommonTokenStream(lexer);
-        ExpressionParser parser = new ExpressionParser(tokens);
-        parser.reportErrorsAsExceptions();
-        ParseTree tree = parser.line();
-        ParseTreeWalker walker = new ParseTreeWalker();
-        OurExpressionListener listener = new OurExpressionListener();
-        walker.walk(listener, tree);
-        return listener.getExpression();
+            CharStream stream = new ANTLRInputStream(input);
+            ExpressionLexer lexer = new ExpressionLexer(stream);
+            TokenStream tokens = new CommonTokenStream(lexer);
+            ExpressionParser parser = new ExpressionParser(tokens);
+            parser.reportErrorsAsExceptions();
+            ParseTree tree = parser.line();
+            ParseTreeWalker walker = new ParseTreeWalker();
+            OurExpressionListener listener = new OurExpressionListener();
+            walker.walk(listener, tree);
+            return listener.getExpression();
         } catch(RuntimeException e){
             throw new IllegalArgumentException();
         }

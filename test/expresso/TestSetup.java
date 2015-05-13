@@ -7,6 +7,10 @@ public class TestSetup {
     protected static Number two;
     protected static Variable x;
     protected static Variable y;
+    protected static Product twox;
+    protected static Product twoplusxtimesxplusy;
+    protected static Product twotimesxtimesxtimesy;
+    protected static Product nestedproductandsumtwoxy;
     protected static Product xy;
     protected static Sum xplusy;
     protected static Expression xplusytimesxy;
@@ -26,6 +30,10 @@ public class TestSetup {
         two = new Number(2);
         x = new Variable("x");
         y = new Variable("y");
+        twox = new Product(two, x);
+        twoplusxtimesxplusy = new Product(new Sum(two, x), new Sum(x, y));
+        twotimesxtimesxtimesy = new Product(new Product(two, x), new Product(x, y));
+        nestedproductandsumtwoxy = new Product(new Sum(two, new Product(x, y)), new Product(new Sum(two, y), x));
         xy = new Product(x,y);
         xplusy = new Sum(x,y);
         xplusytimesxy = new Product(xplusy, xy); 
