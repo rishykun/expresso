@@ -28,7 +28,40 @@ public interface Expression {
      * @param input expression to parse
      * @return expression AST for the input that is mathematically equivalent to the desired Expression,
      *         whose toString() method returns a String that includes all numbers,
-     *         variables, and operations of the input, appearing  in the same order.
+     *         letters, and operations of the input, appearing  in the same order.
+     *         Parentheses in the output are distributed as follows:
+     *         1) If the input is a single variable name or number, no parentheses are shown (i.e. 5 -> 5, (mf) -> mf)
+     *         2) Else each number and variable in the expression is encapsulated in its own set of 
+     *            parentheses. Then, for all the sets of grouped operations implied by the parentheses in the 
+     *            input, parentheses are distributed around the two Monomials involved in that operation.
+     *            Operations in Innermost levels are considered first.
+     *            For operations that are in the same nested level, parentheses are distributed around pairs of numbers
+     *            or letters being multiplied first, from left to right, then parentheses group sums from right to left
+     *            up until the left-most plus sign in that level if the level of the sum takes the least precedence.
+     *            If the right variable or number in an operation-paired set is already doubly encapsulated in parentheses
+     *            as a result of putting parentheses around all numbers and variables (which occurs when parentheses
+     *            are in the input), no further parentheses are distributed for the operation involved.
+     *            
+     *            Examples: The input x * y + x * y + x * y + x has multiple variables, so the output 
+     *                      would so far have: (x) * (y) + (x) * (y) + (x) * (y) + (x)
+     *                      After grouping multiplied terms left to right: ((x) * (y)) + ((x) * (y)) + ((x) * (y)) + (x)
+     *                      Then sums from right to left: ((x) * (y)) + (((x) * (y)) + (((x) * (y)) + (x)))
+     *                      And this is what would be printed.
+     *                      
+     *                      The input x + ((x * y) + x) + x * y * (x + y) would be transformed as follows:
+     *                      After encapsulating all variables: (x) + (((x) * (y)) + (x)) + (x) * (y) * ((x) + (y))
+     *                      Then the innermost operations are considered first. In this case, it would be the first occurrence of
+     *                      ((x) * (y)). Because the y is already covered with two parentheses as a result of the input parentheses,
+     *                      no additional parentheses are placed. Next, the addition operation immediately following is the first occurrence
+     *                      of an operation on its level, and no multiplication operations are on its level, so parentheses would be distributed
+     *                      around the numbers and variables that it operates on, but because the x to the right of the addition is covered with
+     *                      2 parentheses, none are added. By similar reasoning, no parentheses are added for the other addition on its level
+     *                      (the rightmost addition). After looking at the multiplication in the lower level, we get:
+     *                      (x) + (((x) * (y)) + (x)) + ((x) * (y)) * ((x) + (y)) followed by (x) + (((x) * (y)) + (x)) + (((x) * (y)) * ((x) + (y))).
+     *                      Next, since the sum in the same level with the multiplications is not on the most primitive level, we consider it, even
+     *                      though it is the left-most sum on its level. Thus, we get (x) + ((((x) * (y)) + (x)) + (((x) * (y)) * ((x) + (y))))
+     *                      The final sum operation is then ignored, and the output reveals the expression above.
+     *            
      * @throws IllegalArgumentException if the expression is invalid
      *         Invalid inputs are defined as having at least one of the following characteristics:
      *           1) Unbalanced parentheses
@@ -36,7 +69,7 @@ public interface Expression {
      *              by operations (x9u, 3.00f2, 5 y, 3x, etc.)
      *           3) Numbers with more than one decimal, letters that are in the immediate vicinity of a
      *              decimal (i.e. would appear right next to one if spaces are removed), or variable names
-     *              that include space characters
+     *              or numbers that include spaces or parentheses
      *           4) Invalid operations (-, /, ^, or any character that is not a letter, number, decimal,
      *              +, *, space, or parenthesis.)
      *           5) One or more operative symbols that do not have a left and right subexpression

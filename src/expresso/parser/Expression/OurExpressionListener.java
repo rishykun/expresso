@@ -21,7 +21,9 @@ public class OurExpressionListener extends ExpressionBaseListener{
     
     private Stack<Expression> stack = new Stack<Expression>();
     private Stack<String> operations = new Stack<String>();
+    private Stack<Integer> nestLevel = new Stack<Integer>();
     private boolean ignoreLoner = false;
+    private int level = 0;
     
     /**
      * {@inheritDoc}
@@ -38,6 +40,7 @@ public class OurExpressionListener extends ExpressionBaseListener{
     @Override public void exitLine(ExpressionParser.LineContext ctx) {
         assert stack.size() == 1;
         assert operations.size() == 0;
+        assert nestLevel.size() == 0;
     }
     /**
      * {@inheritDoc}
@@ -45,30 +48,8 @@ public class OurExpressionListener extends ExpressionBaseListener{
      * <p>Does nothing when entering an Expression.</p>
      */
     @Override public void enterExpression(ExpressionParser.ExpressionContext ctx) {
-        if (ctx.getChildCount() == 2 
-                && ctx.tail().getChildCount() == 3
-                && ctx.tail().getChild(0).getText().equals("+")
-                && !operations.isEmpty()
-                && operations.peek().equals("*")
-                && ctx.getParent().getChildCount() != 4){
-            Expression toBeMultiplied = stack.pop();
-            stack.push(new Number(1));
-            String value = ctx.loner().getChild(0).getText();
-            if (value.matches("[a-zA-z]+")){
-                Expression variable = new Variable(value);
-                stack.push(new Product(toBeMultiplied, variable));
-            }else{
-                try{
-                    int integerVal = Integer.parseInt(value);
-                    Expression number = new Number(integerVal);
-                    stack.push(new Product(toBeMultiplied, number));
-                }catch (NumberFormatException e){
-                    double doubleVal = Double.parseDouble(value);
-                    Expression number = new Number(doubleVal);
-                    stack.push(new Product(toBeMultiplied, number));
-                }
-            }
-            ignoreLoner = true;
+        if (ctx.parent.getChildCount() == 4 && ctx.getChildCount() == 4){
+            level++;
         }
     }
     /**
@@ -81,29 +62,71 @@ public class OurExpressionListener extends ExpressionBaseListener{
         if (ctx.tail().getChildCount() == 3 && stack.peek().equals(new Number(0))){
             stack.pop();
         }
-        Expression rightChild = stack.pop();
-        Expression leftChild = stack.pop();
-        if (!rightChild.equals(new Number(0))){
-            String op = operations.pop();
-            if (op.equals("*")){
-                Expression product = new Product(leftChild, rightChild);
-                stack.push(product);
+        if ((stack.size() > 1)) {
+            Expression rightChild = stack.pop();
+            Expression leftChild = stack.pop();
+            if (!rightChild.equals(new Number(0))){
+                if (!operations.isEmpty() && !nestLevel.isEmpty()
+                        && nestLevel.peek().equals(new Integer(level))){
+                    String op = operations.pop();
+                    nestLevel.pop();
+                    if (op.equals("*")){
+                        Expression product = new Product(leftChild, rightChild);
+                        stack.push(product);
+                    }else{
+                        Expression sum = new Sum(leftChild, rightChild);
+                        stack.push(sum);
+                    }
+                }else{
+                    stack.push(leftChild);
+                    stack.push(rightChild);
+                }
             }else{
-                Expression sum = new Sum(leftChild, rightChild);
-                stack.push(sum);
+                stack.push(leftChild);
             }
-        }else{
-            stack.push(leftChild);
+            if (ctx.parent.getChildCount() == 4
+                    && stack.size() > 1
+                    && !operations.isEmpty()
+                    && !nestLevel.isEmpty()
+                    && operations.peek().equals("*")
+                    && nestLevel.peek().equals(new Integer(level))){
+                operations.pop();
+                nestLevel.pop();
+                Expression groupedPart = stack.pop();
+                Expression toBeMultiplied = stack.pop();
+                stack.push(new Product(toBeMultiplied, groupedPart));
+            }
+        }
+        if (ctx.getChildCount() == 4 && ctx.parent.getChildCount() == 4){
+            level--;
         }
     }
     /**
      * {@inheritDoc}
      *
-     * <p>When entering a non-empty tail, adds the operation to be performed to ops.</p>
+     * <p>When entering a non-empty tail, gives precedence to ungrouped multiplication over ungrouped addition</p>
      */
     @Override public void enterTail(ExpressionParser.TailContext ctx) {
-        if (ctx.getChildCount() == 3){
+        if (ctx.getChildCount() == 3 
+                && ctx.getChild(0).getText().equals("*")
+                && ctx.getChild(1).getChildCount() != 4){
+            Expression toBeMultiplied = stack.pop();
+            String value = ctx.expression().loner().getChild(0).getText();
+            if (value.matches("[a-zA-z]+")){
+                stack.push(new Product(toBeMultiplied, new Variable(value)));
+            }else{
+                try{
+                    int integerVal = Integer.parseInt(value);
+                    stack.push(new Product(toBeMultiplied, new Number(integerVal)));
+                }catch (NumberFormatException e){
+                    double doubleVal = Double.parseDouble(value);
+                    stack.push(new Product(toBeMultiplied, new Number(doubleVal)));
+                }
+            }
+            ignoreLoner = true;
+        }else if (ctx.getChildCount() == 3){
             operations.push(ctx.getChild(0).getText());
+            nestLevel.push(level);
         }
     }
     /**
