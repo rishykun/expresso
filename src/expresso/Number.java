@@ -11,21 +11,26 @@ public class Number extends Monomial {
     private final boolean isInteger;
     
     //Abstraction function
+    //  numString = number represented without extraneous zeros
     //Rep Invariant
+    //  numString is a string of numbers not beginning with 0 unless
+    //  the number is between 0 and 1 followed by an optional decimal point 
+    //  which is followed by a string of numbers not ending in 0
     //Rep Exposure
+    //  numString and isInteger are private, final, and immutable
     
     /**
      * Creates a number expression representing the specified integer
      * @param n integer to represent
      */
     public Number(int n) {
-        //super(n);
         coeff = n;
         this.numString = Integer.toString(n);
         isInteger = true;
         exps = Collections.unmodifiableMap(exps);
         isMonomial = true;
         leading = this;
+        checkRep();
     }
     
     /**
@@ -46,6 +51,7 @@ public class Number extends Monomial {
         exps = Collections.unmodifiableMap(exps);
         isMonomial = true;
         leading = this;
+        checkRep();
     }
     
     /**
@@ -70,11 +76,15 @@ public class Number extends Monomial {
     }
     
     /**
-     * Returns the string value of the number represented with no unnecessary
-     * trailing zeros.  Integers are represented without the decimal point.
+     * Returns the string value of the number represented with no extraneous zeros 
+     * (beginning or trailing). Integers are represented without the decimal point.
      */
     @Override
     public String toString() {
         return this.numString;
+    }
+    
+    private void checkRep(){
+        assert numString.matches("(([1-9][0-9]*)|0)(.[0-9]*[1-9])?");
     }
 }
