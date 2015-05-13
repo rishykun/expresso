@@ -44,6 +44,8 @@ public class SumTest extends TestSetup {
      *          [x]length of 2nd < 1st, all terms of 2nd go into 1st
      *          [x]length of 2nd = 1st, all terms combine 
      *          [x]the two interleave somewhere when summed
+     *          [x]All terms have same highest exponent but arranged differently
+     *          in each sum
      *      Non-SimpleExpression + Expression
      *          [x]Max exps of terms in arbitrary order + 
      *          max exps of terms in non-decreasing order
@@ -179,6 +181,19 @@ public class SumTest extends TestSetup {
     public void interleaveSimpleSumTest() {
         assertEquals(new SimpleExpression(xtimesx, new SimpleExpression(two.multiply(x), one)), xtimesx.add(x).add(xplusone).simplify());
         assertEquals(new SimpleExpression(xtimesx, new SimpleExpression(two.multiply(x), one)), xplusone.add(xtimesx.add(x)).simplify());       
+    }
+    
+    /**
+     * Tests simplifying sum of x and y+x
+     */
+    @Test
+    public void sameExponentDifferentOrderingTest() {
+        SimpleExpression forwardAdd = x.add(Expression.parse("y+x").simplify()).simplify();
+        SimpleExpression backwardAdd = Expression.parse("y+x").simplify().add(x).simplify();
+        SimpleExpression expected1 = new SimpleExpression(two.multiply(x), y);
+        SimpleExpression expected2 = new SimpleExpression(y, two.multiply(x));
+        assertTrue(forwardAdd.equals(expected1) || forwardAdd.equals(expected2));
+        assertTrue(backwardAdd.equals(expected1) || backwardAdd.equals(expected2));
     }
     
     /**
