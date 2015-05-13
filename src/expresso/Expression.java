@@ -85,6 +85,7 @@ public interface Expression {
             TokenStream tokens = new CommonTokenStream(lexer);
             ExpressionParser parser = new ExpressionParser(tokens);
             parser.reportErrorsAsExceptions();
+            lexer.reportErrorsAsExceptions();
             ParseTree tree = parser.line();
             ParseTreeWalker walker = new ParseTreeWalker();
             OurExpressionListener listener = new OurExpressionListener();
