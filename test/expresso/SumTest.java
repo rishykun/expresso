@@ -224,6 +224,8 @@ public class SumTest extends TestSetup {
     @Test
     public void extraParenContractTest(){
         Expression xyplusone = Expression.parse("x*y+1");
+        assertEquals(new Product(x,y).add(one) ,xyplusone);
+        assertEquals(new Product(x,y).add(one).hashCode(), xyplusone.hashCode());
         assertEquals(xyplusone, Expression.parse("(x*y)+1"));
         assertEquals(xyplusone.hashCode(), Expression.parse("(x*y)+1").hashCode());
         assertEquals(xyplusone, Expression.parse("x*y+(1)"));

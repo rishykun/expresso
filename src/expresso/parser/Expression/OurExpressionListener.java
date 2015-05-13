@@ -7,6 +7,7 @@ import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
+import expresso.Empty;
 import expresso.Expression;
 import expresso.Number;
 import expresso.Product;
@@ -59,13 +60,13 @@ public class OurExpressionListener extends ExpressionBaseListener{
      * appropriate children, or pushes its left child if nothing is to be combined.</p>
      */
     @Override public void exitExpression(ExpressionParser.ExpressionContext ctx) {
-        if (ctx.tail().getChildCount() == 3 && stack.peek().equals(new Number(0))){
+        if (ctx.tail().getChildCount() == 3 && stack.peek().equals(new Empty())){
             stack.pop();
         }
         if ((stack.size() > 1)) {
             Expression rightChild = stack.pop();
             Expression leftChild = stack.pop();
-            if (!rightChild.equals(new Number(0))){
+            if (!rightChild.equals(new Empty())){
                 if (!operations.isEmpty() && !nestLevel.isEmpty()
                         && nestLevel.peek().equals(new Integer(level))){
                     String op = operations.pop();
@@ -132,12 +133,12 @@ public class OurExpressionListener extends ExpressionBaseListener{
     /**
      * {@inheritDoc}
      *
-     * <p>When exiting an empty tail, adds Number(0) to the stack to represent nothing
+     * <p>When exiting an empty tail, adds Empty() to the stack to represent nothing
      * (will be removed).</p>
      */
     @Override public void exitTail(ExpressionParser.TailContext ctx) {
         if (ctx.getChildCount() == 0){
-            stack.push(new Number(0));
+            stack.push(new Empty());
         }
     }
     /**
