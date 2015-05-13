@@ -54,16 +54,16 @@ public class Main {
      * if the expression is invalid
      */
     private static String handleExpression(String input) {
-        try{
+        //try{
             currentExpression = Expression.parse(input);
             return currentExpression.toString();
-        } 
-        catch (IllegalArgumentException e){
-            throw new IllegalArgumentException();
+        //} 
+        //catch (IllegalArgumentException e){
+          //  throw new IllegalArgumentException();
             //return invalidExpressionError;
             
             
-        }
+        //}
        
         
     }

@@ -11,12 +11,15 @@ public class TestSetup {
     protected static Expression onetimesone;
     protected static Variable x;
     protected static Variable y;
+    protected static Variable z;
+    protected static Variable alongname;
     protected static Product twox;
     protected static Product twoplusxtimesxplusy;
     protected static Product twotimesxtimesxtimesy;
     protected static Product nestedproductandsumtwoxy;
     protected static Product xy;
     protected static Sum xplusy;
+    protected static Sum xplusypluszplusone;
     protected static Expression xplusone;
     protected static Monomial xtimesx;
     protected static SimpleExpression xtimesxplusx;
@@ -32,15 +35,18 @@ public class TestSetup {
     public static void setup(){
         x = new Variable("x");
         y = new Variable("y");
+        z = new Variable("z");
         one = new Number(1);
         zero = new Number(0);
         two = new Number(02.0);
         twox = new Product(two, x);
+        alongname = new Variable("alongname");
         twoplusxtimesxplusy = new Product(new Sum(two, x), new Sum(x, y));
         twotimesxtimesxtimesy = new Product(new Product(two, x), new Product(x, y));
         nestedproductandsumtwoxy = new Product(new Sum(two, new Product(x, y)), new Product(new Sum(two, y), x));
         xy = new Product(x,y);
         xplusy = new Sum(x,y);
+        xplusypluszplusone = new Sum(x, new Sum(y, new Sum(z, one)));
         xplusone = x.add(one);
         xtimesx = x.multiply(x);
         xtimesxplusx = new SimpleExpression(xtimesx, x);
