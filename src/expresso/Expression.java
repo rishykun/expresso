@@ -21,7 +21,7 @@ public interface Expression {
     //  Expression = Number(n: Integer) + Number(d: Double) + Variable(v: String) 
     //            +   Sum(e1: Expression, e2: Expression) + Product(e1: Expression, e2: Expression)
     //              +   Monomial(n: Integer, vMap: TreeMap<String,Integer>) + Monomial(d: Double, vMap: TreeMap<String,Integer>)
-    //              +   SimpleExpression(m: Monomial, e: SimpleExpression)
+    //              +   SimpleExpression(m: Monomial, e: SimpleExpression) + Empty()
 
     /**
      * Parse an expression.

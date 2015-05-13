@@ -1,5 +1,8 @@
 package expresso;
 
+/**
+ * Represents the sum of two expressions
+ */
 public class Sum implements Expression{
     
     private final Expression first;
@@ -137,7 +140,7 @@ public class Sum implements Expression{
 
     /**
      * Returns the String representation of this sum
-     * in the form first expression + second expression
+     * in the form (first expression) + (second expression)
      */
     @Override
     public String toString() {
