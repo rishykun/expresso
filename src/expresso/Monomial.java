@@ -114,7 +114,7 @@ public class Monomial extends SimpleExpression {
     @Override
     public String toString(){
         String out = String.valueOf(coeff);
-        out = out.replaceAll("0*$", "").replaceAll(".$", "");
+        out = out.replaceAll("0*$", "").replaceAll("\\.$", "");
         for (String v:exps.keySet()){
             for (int i =0; i<exps.get(v); i++)
                 out += "*"+v;
