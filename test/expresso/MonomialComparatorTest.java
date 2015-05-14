@@ -12,7 +12,7 @@ public class MonomialComparatorTest extends TestSetup {
     /*
      * compare
      *  first [x]>, [x]< second
-     *  [x]Number, [x]Variable, [x]Other
+     *  [x]Number, [x]Variable, [x]other Monomial
      *  [x]Max exponents different
      *  Max exponents are the same
      *      [x]Variables are different
@@ -26,8 +26,14 @@ public class MonomialComparatorTest extends TestSetup {
         TestSetup.setup();
     }
         
+    // All tests test both comparison directions
+    // i.e. compare(first, second) and compare(second, first)
+    // to test the symmetry
+    
     /**
      * Compares 1 with x
+     * 
+     * Covers using Numbers and Variables
      */
     @Test
     public void numberVariableCompareTest() {
@@ -37,6 +43,10 @@ public class MonomialComparatorTest extends TestSetup {
     
     /**
      * Compares x*x with y*y and x*y with y*z
+     * 
+     * Covers using other Monomial and comparing
+     * Monomials w/ same max exponent but different
+     * variables
      */
     @Test
     public void sameMaxExponentDifferentVariablesCompareTest(){
@@ -48,6 +58,9 @@ public class MonomialComparatorTest extends TestSetup {
     
     /**
      * Compares x*y*y with x*x*y
+     * 
+     * Covers comparing Monomials w/ same max exponent
+     * and same variables
      */
     @Test
     public void sameMaxExponentSameVariablesDifferentExponentTest(){

@@ -51,7 +51,6 @@ public class SumTest extends TestSetup {
      *          max exps of terms in non-decreasing order
      *          [x]Product + Sum which can combine
      *          [x]Product + Product which can combine
-
      *          
      * toString
      *  [x]Any Sum
@@ -84,6 +83,8 @@ public class SumTest extends TestSetup {
     
     /**
      * Tests summations while building up the expression (x+y)*xy
+     * 
+     * Covers add and multiply partition
      */
     @Test
     public void operationTest() {
@@ -94,6 +95,8 @@ public class SumTest extends TestSetup {
     
     /**
      * Tests derivatives of x+1 and x*y+y with respect to x
+     * 
+     * Covers all partitions of differentiate
      */
     @Test
     public void derivativeTest() {
@@ -103,6 +106,8 @@ public class SumTest extends TestSetup {
     
     /**
      * Tests simplifying the sum of two numbers
+     * 
+     * Covers simplify: Number+Number
      */
     @Test
     public void numberSumSimplifyTest() {
@@ -113,6 +118,8 @@ public class SumTest extends TestSetup {
     
     /**
      * Tests simplifying additions with zero
+     * 
+     * Covers simplify: Non-number+0
      */
     @Test
     public void zeroAddSimplifyTest(){
@@ -123,6 +130,9 @@ public class SumTest extends TestSetup {
     
     /**
      * Tests simplifying x+1 and (x*x)+x
+     * 
+     * Covers non-variable monomial + monomial w/coeff 1
+     * and non-number monomial + number
      */
     @Test
     public void variableAddNoSimplifyTest(){
@@ -131,12 +141,14 @@ public class SumTest extends TestSetup {
     }
     
     /**
-     * Tests simplifying 1+x, x+x*x, x+y*y, x+y
+     * Tests simplifying 1+x, x*x+x, x+y*y, x+y
+     * 
+     * Covers all of Non-Number Monomial + Non-Number Monomial
      */
     @Test
     public void simplifyOrderingTest(){
         assertEquals(xplusone.simplify(), Expression.parse("1+x").simplify());
-        assertEquals(new SimpleExpression(x.multiply(x), x).simplify(), x.add(x.multiply(x)).simplify());
+        assertEquals(new SimpleExpression(x.multiply(x), x).simplify(), x.multiply(x).add(x).simplify());
         assertEquals(new SimpleExpression(y.multiply(y), x), x.add(y.multiply(y)).simplify());
         assertTrue(new SimpleExpression(x, y).equals(xplusy.simplify()) || 
                 new SimpleExpression(y,x).equals(xplusy.simplify()));
@@ -144,6 +156,8 @@ public class SumTest extends TestSetup {
     
     /**
      * Tests simplifying x+1.1x and x*y+1*y*x
+     * 
+     * Covers all of two monomials that can combine
      */
     @Test
     public void combineMonomialTest() {
@@ -153,6 +167,10 @@ public class SumTest extends TestSetup {
     
     /**
      * Tests simplifying sum of x*x+x with x in forward and reverse order
+     * 
+     * Covers first two []s of SimpleExpression + SimpleExpression where
+     * one SE is basically a subset of the other SE and hence the number of
+     * terms is the max of the number of terms in either SE
      */
     @Test
     public void subsetSimpleSumTest() {
@@ -162,6 +180,8 @@ public class SumTest extends TestSetup {
     
     /**
      * Tests simplifying sum of x*x+x+1 with x*x+1.1*x+2
+     * 
+     * Covers third [] of SE + SE where all the terms combine
      */
     @Test
     public void equalSimpleSumTest() {
@@ -176,6 +196,9 @@ public class SumTest extends TestSetup {
     
     /**
      * Tests simplifying sum of x*x+x with x+1
+     * 
+     * Covers 4th [] of SE+SE where some terms combine but
+     * some terms interleave
      */
     @Test
     public void interleaveSimpleSumTest() {
@@ -185,6 +208,10 @@ public class SumTest extends TestSetup {
     
     /**
      * Tests simplifying sum of x and y+x
+     * 
+     * Covers 5th [] of SE+SE since x appears later in
+     * y+x so x and y are being compared first as a result
+     * of their ordering
      */
     @Test
     public void sameExponentDifferentOrderingTest() {
@@ -198,6 +225,10 @@ public class SumTest extends TestSetup {
     
     /**
      * Tests simplifying sum of x+x*y+y*y with x*y+y*y+x
+     * 
+     * Covers 1st [] of Non-SE + SE since max exp sequence
+     * of first is 1 1 2 (non-decreasing) while max exp 
+     * sequence of second is 1 2 1 (arbitrary)
      */
     @Test
     public void differentOrderExponentTest() {
@@ -206,6 +237,8 @@ public class SumTest extends TestSetup {
     
     /**
      * Tests simplifying sum of x*(x+1) with x and (x+1)*(x+1) with x*x
+     * 
+     * Covers last two []s of Non-SE + SE
      */
     @Test
     public void sumAndProductSimplifyTest(){
@@ -216,6 +249,8 @@ public class SumTest extends TestSetup {
     /**
      * Tests toStrings of sums while building up the expression
      * (x+y)+x*y
+     * 
+     * Covers toString partition
      */
     @Test
     public void toStringTest() {
@@ -225,6 +260,8 @@ public class SumTest extends TestSetup {
     
     /**
      * Tests equality between x+1 and x+1
+     * 
+     * Covers trivial identity partition
      */
     @Test
     public void balancedParenContractTest() {
@@ -235,6 +272,8 @@ public class SumTest extends TestSetup {
     
     /**
      * Tests equality between x*y+1, (x*y)+1, x*y+(1), and (x*y+1)
+     * 
+     * Covers extra parenthesis equality partition
      */
     @Test
     public void extraParenContractTest(){
@@ -251,6 +290,8 @@ public class SumTest extends TestSetup {
     
     /*
      * Tests inequality between x+1, x+y, and x*1
+     * 
+     * Covers not-identical in terms and operations
      */
     @Test
     public void unequalTermsTest(){
@@ -261,6 +302,8 @@ public class SumTest extends TestSetup {
     
     /*
      * Tests inequality after adding 0
+     * 
+     * Covers non-identical after adding extra 0 term
      */
     @Test
     public void zeroAddUnequalTest(){
@@ -269,6 +312,8 @@ public class SumTest extends TestSetup {
     
     /*
      * Tests inequality after multilpying by 1
+     * 
+     * Covers non-identical after multiplying by extra 1 term
      */
     @Test
     public void multiplyOneUnequalTest(){
@@ -277,6 +322,8 @@ public class SumTest extends TestSetup {
     
     /**
      * Tests inequality between x+1 and 1+x
+     * 
+     * Covers unequal term ordering partition
      */
     @Test
     public void unequalOrderingTest(){
@@ -285,6 +332,8 @@ public class SumTest extends TestSetup {
     
     /*
      * Tests inequality between (x+x)+y and x+(x+y)
+     * 
+     * Covers unequal grouping partition
      */
     @Test
     public void unequalGroupingTest(){
