@@ -43,7 +43,6 @@ public class Product implements Expression{
 
     @Override
     public SimpleExpression simplify() {
-        System.out.println("Simplifying " + this.toString());
         SimpleExpression first = this.first.simplify();
         SimpleExpression second = this.second.simplify();
         Expression summand = new Number(0);
@@ -57,17 +56,10 @@ public class Product implements Expression{
             for (Monomial m:second){
                 summand = summand.add(m.multiply(multiplier));
             }
-            SimpleExpression s = summand.simplify();
-            System.out.println("Simplified " +this.toString() + "to");
-            System.out.println(s);
-            return s;
+            return summand.simplify();
         }
         else {
-            SimpleExpression s = (new Sum(first.leading().multiply(second), first.truncate().multiply(second))).simplify();
-            System.out.println("Simplified " +this.toString() + "to");
-            System.out.println(s);
-            return s;
-            //return (new Sum(first.leading().multiply(second), first.truncate().multiply(second))).simplify();
+            return (new Sum(first.leading().multiply(second), first.truncate().multiply(second))).simplify();
         }
         
     }

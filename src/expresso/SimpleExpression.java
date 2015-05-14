@@ -123,15 +123,4 @@ public class SimpleExpression implements Expression, Iterable<Monomial>  {
     public int hashCode(){
         return leading.hashCode() + remaining.hashCode();
     }
-    
-    public static void main(String[] args){
-        SimpleExpression e1 = Expression.parse("xy+y*x*x").simplify();
-        SimpleExpression e2 = Expression.parse("(x+1)*(x+2)").simplify();
-        System.out.println(e1);
-        System.out.println(e2);
-        SimpleExpression e3 = Expression.parse("xy+yz").simplify();
-        System.out.println(e3);
-        Expression e4 = Expression.parse("x+x");
-        System.out.println(e4.differentiate(new Variable("x")));
-    }
 }
