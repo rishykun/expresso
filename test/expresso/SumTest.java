@@ -218,9 +218,8 @@ public class SumTest extends TestSetup {
         SimpleExpression forwardAdd = x.add(Expression.parse("y+x").simplify()).simplify();
         SimpleExpression backwardAdd = Expression.parse("y+x").simplify().add(x).simplify();
         SimpleExpression expected1 = new SimpleExpression(two.multiply(x), y);
-        SimpleExpression expected2 = new SimpleExpression(y, two.multiply(x));
-        assertTrue(forwardAdd.equals(expected1) || forwardAdd.equals(expected2));
-        assertTrue(backwardAdd.equals(expected1) || backwardAdd.equals(expected2));
+        assertTrue(forwardAdd.equals(expected1));
+        assertTrue(backwardAdd.equals(expected1));
     }
     
     /**
