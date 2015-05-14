@@ -1,5 +1,7 @@
 package expresso;
 
+import java.util.TreeMap;
+
 public class TestSetup {
     
     protected static Number one;
@@ -28,7 +30,14 @@ public class TestSetup {
     protected static Sum xplusypluszplusone;
     protected static Expression xplusone;
     protected static Monomial xtimesx;
+    protected static Monomial xtimesy;
+    protected static Monomial threepointtwotimesxtimesy;
+    protected static Monomial twotimesxtimesx;
     protected static SimpleExpression xtimesxplusx;
+    protected static TreeMap<String, Integer> mapxtimesx = new TreeMap<>();
+    protected static TreeMap<String, Integer> mapxtimesy = new TreeMap<>();
+    protected static TreeMap<String, Integer> mapthreepointtwotimesxtimesy = new TreeMap<>();
+    protected static TreeMap<String, Integer> maptwotimesxtimesx = new TreeMap<>();
 
     protected static Expression xplusytimesxy;
     protected static Expression xytimesxplusy;
@@ -59,10 +68,23 @@ public class TestSetup {
         xplusypluszplusone = new Sum(x, new Sum(y, new Sum(z, one)));
         xplusone = x.add(one);
         xtimesx = x.multiply(x);
+        xtimesy = x.multiply(y);
+        threepointtwotimesxtimesy = x.multiply(y).multiply(new Number(3.2));
+        twotimesxtimesx = x.multiply(x).multiply(new Number(2));
         xtimesxplusx = new SimpleExpression(xtimesx, x);
         twoy = new Product(two, y);
         fourxy = new Product(new Product(x, y), four);
         twoxysquared = new Product(new Product(two, x), new Product(y, y));
+        
+        mapxtimesx.put("x", 2);
+        mapxtimesy.put("x", 1);
+        mapxtimesy.put("y", 1);
+        mapthreepointtwotimesxtimesy.put("x", 1);
+        mapthreepointtwotimesxtimesy.put("y", 1);
+        maptwotimesxtimesx.put("x", 2);
+        
+        
+        
         
         xplusytimesxy = Expression.parse("(x+y)*(x*y)"); 
         xytimesxplusy = Expression.parse("(x*y)*(x+y)");
