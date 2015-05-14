@@ -6,8 +6,11 @@ public class Product implements Expression{
     private final Expression second;
     
     //Abstraction function
+    // Represents the product first * second
     //Rep Invariant
+    // True
     //Rep Exposure
+    // first and second are private, final, and immutable
     
     /**
      * Constructs the product of two specified expressions
@@ -17,6 +20,7 @@ public class Product implements Expression{
     public Product(Expression e1, Expression e2){
         first = e1;
         second = e2;
+        checkRep();
     }
     
     @Override
@@ -84,4 +88,7 @@ public class Product implements Expression{
         return first.hashCode() * second.hashCode();
     }   
 
+    private void checkRep(){
+        assert true;
+    }
 }

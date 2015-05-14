@@ -2,14 +2,19 @@ package expresso;
 
 import java.util.Collections;
 
-
+/**
+ *  Represents a variable in an Expression
+ */
 public class Variable extends Monomial{
     
     private final String variable;
     
     //Abstraction function
+    //  variable is the string representation of the variable represented
     //Rep Invariant
+    //  True
     //Rep Exposure
+    //  variable is private, final, and immutable
     
     /**
      * Creates a variable expression representing the specified variable
@@ -22,6 +27,7 @@ public class Variable extends Monomial{
         exps = Collections.unmodifiableMap(exps);
         isMonomial = true;
         leading = this;
+        checkRep();
     }
     
     @Override
@@ -39,6 +45,10 @@ public class Variable extends Monomial{
     @Override
     public int hashCode(){
         return variable.hashCode();
+    }
+    
+    public void checkRep(){
+        assert true;
     }
 
 }
