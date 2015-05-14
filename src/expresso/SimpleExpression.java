@@ -13,13 +13,38 @@ public class SimpleExpression implements Expression, Iterable<Monomial>  {
     private SimpleExpression remaining;
     protected boolean isMonomial = false;
     
-    //Abstraction function
-    //Rep Invariant
-    //Rep Exposure
+    /*
+     * ABSTRACTION FUNCTION
+     * leading represents the leading term of a simplified expression
+     * remaining represents the trailing monomial terms in simplified order
+     * 
+     * 
+     * REP INVARIANT
+     * leading is greater than the first term of remaining
+     * remaining is a valid SimpleExpression
+     * isSingleTerm is true if SimpleExpression is a monomial;
+     * otherwise it's false
+     * 
+     * 
+     * REP EXPOSURE SAFETY
+     * all fields are either private or protected
+     * 
+     * SimpleExpression is immutable: methods that perform operations on 
+     * SimpleExpression never directly modify its fields
+     * 
+     * protected fields are only ever accessed by this class and
+     * its children's constructor, so it is not exposed 
+     */
+    
+    
+    private void checkRep() {
+        assert new MonomialComparator().compare(leading, remaining.leading()) > 0;    
+    }
     
     public SimpleExpression(Monomial m, SimpleExpression e){
         leading = m;
         remaining = e;
+        checkRep();
     }
     
     public SimpleExpression(){}
