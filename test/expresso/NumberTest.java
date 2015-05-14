@@ -28,6 +28,8 @@ public class NumberTest extends TestSetup {
     
     /**
      * Differentiates 0, 1, and 001.100
+     * 
+     * Covers all differentiate partitions
      */
     @Test
     public void derivativeTest() {
@@ -38,6 +40,8 @@ public class NumberTest extends TestSetup {
     
     /**
      * Tests isInteger on 1, 2.0, and 001.100
+     * 
+     * Covers all isInteger partitions
      */
     @Test
     public void isIntegerTest() {
@@ -48,6 +52,8 @@ public class NumberTest extends TestSetup {
     
     /**
      * Tests toString on 0, 1, 02.0, 0.0, 1.0, 001.100
+     * 
+     * Covers all toString partitions
      */
     @Test
     public void toStringTest() {

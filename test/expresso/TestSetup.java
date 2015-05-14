@@ -4,7 +4,6 @@ import java.util.TreeMap;
 
 public class TestSetup {
     
-    //basic expressions
     protected static Number one;
     protected static Number zero;
     protected static Number two;
@@ -39,9 +38,7 @@ public class TestSetup {
     protected static TreeMap<String, Integer> mapxtimesy = new TreeMap<>();
     protected static TreeMap<String, Integer> mapthreepointtwotimesxtimesy = new TreeMap<>();
     protected static TreeMap<String, Integer> maptwotimesxtimesx = new TreeMap<>();
-    
-    
-    //slightly more complicated expressions
+
     protected static Expression xplusytimesxy;
     protected static Expression xytimesxplusy;
     protected static Expression xplusyplusxy;

@@ -26,7 +26,6 @@ public class SimpleExpression implements Expression, Iterable<Monomial>  {
     
     @Override
     public Expression add(Expression e) {
-        //return leading.add(remaining).add(e);
         return new Sum(this, e);
     }
     
@@ -42,7 +41,6 @@ public class SimpleExpression implements Expression, Iterable<Monomial>  {
 
     @Override
     public Expression multiply(Expression e) {
-        //return leading.add(remaining).multiply(e);
         return new Product(this, e);
     }
 
@@ -122,17 +120,5 @@ public class SimpleExpression implements Expression, Iterable<Monomial>  {
     @Override
     public int hashCode(){
         return leading.hashCode() + remaining.hashCode();
-    }
-    
-    public static void main(String[] args) throws IllegalArgumentException{
-        //SimpleExpression e1 = Expression.parse("xy+y*x*x").simplify();
-        //SimpleExpression e2 = Expression.parse("(x+1)*(x+2)").simplify();
-        //System.out.println(e1);
-        //System.out.println(e2);
-        //SimpleExpression e3 = Expression.parse("xy+yz").simplify();
-        //System.out.println(e3);
-        System.out.println("try");
-        System.out.println(Expressions.differentiate("xx","x y"));
-        //System.out.println(e4.differentiate(new Variable("x")));
     }
 }

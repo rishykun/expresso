@@ -262,13 +262,13 @@ Precedence
 try: x*y*z+z*1+x*1+x
 obtain: (((x) * (y)) * (z)) + (((z) * (1)) + (((x) * (1)) + (x)))
 try: !simplify
-obtain: x*y*z+z+2*x
+obtain: 2*x+z+x*y*z
 
 Grouping
 try: ((x*y*((z))+z))*1+(x*1+x)
 obtain: ((((x) * (y)) * ((z) + (z))) * (1)) + (((x) * (1)) + (x))
 try: !simplify
-obtain: 2*x*y*z+2*x
+obtain: 2*x+2*x*y*z
 
 
 
