@@ -66,7 +66,6 @@ public class Sum implements Expression{
         Monomial secondMon = second.leading();
         SimpleExpression secondRemainder = second.truncate();
         Monomial addedTerm;
-        int compareVal =  new MonomialComparator().compare(firstMon, secondMon);
         System.out.println(firstMon);
         System.out.println(secondMon);
         System.out.println(firstMon.equals(secondMon));
@@ -99,41 +98,44 @@ public class Sum implements Expression{
             }
             
         }
-        else if (compareVal > 0){
-            addedTerm = firstMon;
-            if (first.checkMonomial()){
-                SimpleExpression s = second.simpleAdd(addedTerm);
-                System.out.println("Simplified "+ this.toString() + "to" + s.toString());
-                return s;
-                //return second.simpleAdd(addedTerm);
+        else{
+            int compareVal =  new MonomialComparator().compare(firstMon, secondMon);
+            if (compareVal > 0){
+                addedTerm = firstMon;
+                if (first.checkMonomial()){
+                    SimpleExpression s = second.simpleAdd(addedTerm);
+                    System.out.println("Simplified "+ this.toString() + "to" + s.toString());
+                    return s;
+                    //return second.simpleAdd(addedTerm);
+                }
+                else {
+                    System.out.println("here");
+                    System.out.println(first.checkMonomial());
+                    System.out.println(first);
+                    System.out.println(second);
+                    System.out.println(firstRemainder);
+                    System.out.println(second);
+                    System.out.println(addedTerm);
+                    SimpleExpression s = firstRemainder.add(second).simplify().simpleAdd(addedTerm);
+                    System.out.println("Simplified "+ this.toString() + "to" + s.toString());
+                    return s;
+                    //return firstRemainder.add(second).simplify().simpleAdd(addedTerm);
+                }
             }
             else {
-                System.out.println("here");
-                System.out.println(first.checkMonomial());
-                System.out.println(first);
-                System.out.println(second);
-                System.out.println(firstRemainder);
-                System.out.println(second);
-                System.out.println(addedTerm);
-                SimpleExpression s = firstRemainder.add(second).simplify().simpleAdd(addedTerm);
-                System.out.println("Simplified "+ this.toString() + "to" + s.toString());
-                return s;
-                //return firstRemainder.add(second).simplify().simpleAdd(addedTerm);
-            }
-        }
-        else {
-            addedTerm = secondMon;
-            if (second.checkMonomial()){
-                SimpleExpression s = first.simpleAdd(addedTerm);
-                System.out.println("Simplified "+ this.toString() + "to" + s.toString());
-                return s;
-                //return first.simpleAdd(addedTerm);
-            }
-            else {
-                SimpleExpression s =  secondRemainder.add(first).simplify().simpleAdd(addedTerm);
-                System.out.println("Simplified "+ this.toString() + "to" + s.toString());
-                return s;
-                //return secondRemainder.add(first).simplify().simpleAdd(addedTerm);
+                addedTerm = secondMon;
+                if (second.checkMonomial()){
+                    SimpleExpression s = first.simpleAdd(addedTerm);
+                    System.out.println("Simplified "+ this.toString() + "to" + s.toString());
+                    return s;
+                    //return first.simpleAdd(addedTerm);
+                }
+                else {
+                    SimpleExpression s =  secondRemainder.add(first).simplify().simpleAdd(addedTerm);
+                    System.out.println("Simplified "+ this.toString() + "to" + s.toString());
+                    return s;
+                    //return secondRemainder.add(first).simplify().simpleAdd(addedTerm);
+                }
             }
         }    
     }
