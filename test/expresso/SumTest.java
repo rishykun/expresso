@@ -201,7 +201,7 @@ public class SumTest extends TestSetup {
      */
     @Test
     public void differentOrderExponentTest() {
-        assertEquals(new SimpleExpression(two.multiply(y).multiply(y), new SimpleExpression(two.multiply(x).multiply(y), two.multiply(x))), x.add(xy).add(y.multiply(y)).add(xy.add(y.multiply(y).add(x))).simplify());
+        assertEquals(new SimpleExpression(two.multiply(y).multiply(y), new SimpleExpression(two.multiply(x), two.multiply(x).multiply(y))), x.add(xy).add(y.multiply(y)).add(xy.add(y.multiply(y).add(x))).simplify());
     }
     
     /**
