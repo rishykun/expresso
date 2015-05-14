@@ -13,8 +13,18 @@ public class Monomial extends SimpleExpression {
     protected Map<String, Integer> exps = new TreeMap<>();
     
     //Abstraction function
+    //  Represents the Monomial whose coefficient is coeff
+    //  and the exponent of variable x (string representation)
+    //   is given by exps.get(x)
     //Rep Invariant
+    //  true
     //Rep Exposure
+    //  coeff is immutable, even though coeff is protected
+    //  we only initialize it elsewhere in the constructors of Monomial's
+    //  children, Number and Variable, so it is not exposed
+    //  exps is always gets an immutable wrapper after
+    //  initialization so it is immutable and it is also
+    //  only accessed by children constructors
     
     public Monomial(int n, TreeMap<String, Integer> components){
         coeff = n;
@@ -123,6 +133,10 @@ public class Monomial extends SimpleExpression {
             out=out.substring(2, out.length());
         }
         return out;
+    }
+    
+    private void checkRep(){
+        assert true;
     }
 
 }
