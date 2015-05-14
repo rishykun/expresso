@@ -77,7 +77,6 @@ public class Product implements Expression{
         if (!(other instanceof Product)){return false;}
         Product otherProduct = (Product) other;
         return first.equals(otherProduct.first) && second.equals(otherProduct.second);
-        //return this.toString().equals(otherExpression.toString());
     }
     
     @Override

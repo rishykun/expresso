@@ -26,7 +26,6 @@ public class SimpleExpression implements Expression, Iterable<Monomial>  {
     
     @Override
     public Expression add(Expression e) {
-        //return leading.add(remaining).add(e);
         return new Sum(this, e);
     }
     
@@ -42,7 +41,6 @@ public class SimpleExpression implements Expression, Iterable<Monomial>  {
 
     @Override
     public Expression multiply(Expression e) {
-        //return leading.add(remaining).multiply(e);
         return new Product(this, e);
     }
 
