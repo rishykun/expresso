@@ -85,6 +85,6 @@ public class Number extends Monomial {
     }
     
     private void checkRep(){
-        assert numString.matches("(([1-9][0-9]*)|0)(.[0-9]*[1-9])?");
+        assert numString.matches("(([1-9][0-9]*)|0)(.[0-9]*[1-9])?") && isMonomial;
     }
 }

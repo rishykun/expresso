@@ -17,7 +17,7 @@ public class Monomial extends SimpleExpression {
     //  and the exponent of variable x (string representation)
     //   is given by exps.get(x)
     //Rep Invariant
-    //  true
+    //  isMonomial true
     //Rep Exposure
     //  coeff is immutable, even though coeff is protected
     //  we only initialize it elsewhere in the constructors of Monomial's
@@ -31,6 +31,7 @@ public class Monomial extends SimpleExpression {
         exps = Collections.unmodifiableMap(components);
         isMonomial = true;
         leading = this;
+        checkRep();
     }
     
     public Monomial(double d, TreeMap<String, Integer> components){
@@ -38,6 +39,7 @@ public class Monomial extends SimpleExpression {
         exps = Collections.unmodifiableMap(components);
         isMonomial = true;
         leading = this;
+        checkRep();
     }
     
     protected Monomial(){}
@@ -136,7 +138,7 @@ public class Monomial extends SimpleExpression {
     }
     
     private void checkRep(){
-        assert true;
+        assert isMonomial;
     }
 
 }
